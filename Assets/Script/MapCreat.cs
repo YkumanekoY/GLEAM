@@ -11,7 +11,7 @@ public class MapCreat : MonoBehaviour {
 	int input_yoko=9;	//マップ横	フィールドで入れられたらいいね
 
 	float xPos=0; //スタート位置
-	float yPos=0; //スタート位置
+	float zPos=0; //スタート位置
 
 	int[,] array_MapList = new int[9,9];	//マップ配列
 
@@ -22,18 +22,19 @@ public class MapCreat : MonoBehaviour {
 			for (int j=0; j<input_tate; j++) {
 				
 				if (i == 4 && j == 4) {
-					GameObject.Instantiate (town, new Vector2 (xPos, yPos), new Quaternion ());
+					GameObject.Instantiate (town, new Vector3 (xPos, 0, zPos), new Quaternion ());
 					array_MapList [4, 4] = 4 ;
-				} else {
-					GameObject.Instantiate (cube, new Vector2 (xPos, yPos), new Quaternion ());
+				} 
+				else {
+					GameObject.Instantiate (cube, new Vector3 (xPos, 0, zPos), new Quaternion ());
 				}
 
-				yPos += cube.transform.localScale.y;
+				xPos += cube.transform.localScale.x;
 				//array_MapList [i, j] = 0;
 
 			}
-			yPos = 0;
-			xPos += cube.transform.localScale.x;
+			xPos = 0;
+			zPos += cube.transform.localScale.z;
 		}
 
 
