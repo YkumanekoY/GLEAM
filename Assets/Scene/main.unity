@@ -473,6 +473,7 @@ GameObject:
   - component: {fileID: 1273035657}
   - component: {fileID: 1273035656}
   - component: {fileID: 1273035660}
+  - component: {fileID: 1273035661}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -536,13 +537,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1273035655}
-  m_LocalRotation: {x: 0.35207632, y: -0.3955625, z: 0.16747473, w: 0.83157974}
+  m_LocalRotation: {x: 0.34682897, y: -0.39044833, z: 0.161729, w: 0.8373192}
   m_LocalPosition: {x: 28.500538, y: 41.463917, z: -24.24226}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: -50, z: 0}
 --- !u!114 &1273035660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,6 +557,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cube: {fileID: 1572998850739008, guid: a0f673d14e43f4b5dbc76a874979529c, type: 2}
   town: {fileID: 1679955324367104, guid: a51240aa402694adc9e1177621197c94, type: 2}
+  input_tate: 9
+  input_yoko: 9
+--- !u!114 &1273035661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1273035655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f004d66d255f7415bbaf375085bc1469, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  town: {fileID: 1679955324367104, guid: a51240aa402694adc9e1177621197c94, type: 2}
+  mapCreat: {fileID: 0}
 --- !u!1 &1434531225
 GameObject:
   m_ObjectHideFlags: 0

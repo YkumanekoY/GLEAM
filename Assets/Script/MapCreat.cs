@@ -7,8 +7,8 @@ public class MapCreat : MonoBehaviour {
 	public GameObject cube;
 	public GameObject town;
 
-	int input_tate=9;	//マップ縦
-	int input_yoko=9;	//マップ横	フィールドで入れられたらいいね
+	public int input_tate=9;	//マップ縦
+	public int input_yoko=9;	//マップ横	フィールドで入れられたらいいね
 
 	float xPos=0; //スタート位置
 	float zPos=0; //スタート位置
@@ -21,10 +21,10 @@ public class MapCreat : MonoBehaviour {
 		for (int i = 0; i<input_yoko; i++) {
 			for (int j=0; j<input_tate; j++) {
 				
-				if (i == 4 && j == 4) {
+				if (i == (input_tate - 1) / 2 && j == (input_yoko - 1) / 2) {
 					GameObject.Instantiate (town, new Vector3 (xPos, 0, zPos), new Quaternion ());
-					array_MapList [4, 4] = 4 ;
-				} 
+					array_MapList [(input_tate - 1) / 2, (input_yoko - 1) / 2] = 4;
+				}
 				else {
 					GameObject.Instantiate (cube, new Vector3 (xPos, 0, zPos), new Quaternion ());
 				}

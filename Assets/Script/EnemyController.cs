@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class EnemyControler : MonoBehaviour {
+public class EnemyController : MonoBehaviour {
 
 	private CharacterController enemyController;
 	
@@ -25,5 +25,6 @@ public class EnemyControler : MonoBehaviour {
 		transform.rotation = Quaternion.Slerp (transform.rotation, targetRotation, Time.deltaTime * rotationSmooth);
 			
 		transform.Translate (Vector3.forward * speed * Time.deltaTime);
+
 	}
 }
