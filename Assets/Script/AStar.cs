@@ -5,6 +5,10 @@ using System.Collections.Generic;
 /// A-star algorithm
 public class AStar : MonoBehaviour
 {
+
+	public GameObject Enemy;
+
+
     struct Point2
     {
         public int x;
@@ -303,20 +307,45 @@ public class AStar : MonoBehaviour
 
     IEnumerator Start()
     {
-        var map = new int[9, 9]; //0を何もないところ1を障害物アリとする //大きさを変更したり個々の値を変更すると障害物アリで出来る。
+		var map =new int[11,11]{
+			{1,1,1,1,1,1,1,1,1,1,1},
+			{1,0,0,0,0,0,0,0,0,0,1},
+			{1,0,0,0,0,0,0,0,0,0,1},
+			{1,0,2,0,0,0,0,0,0,0,1},
+			{1,0,0,0,0,0,0,0,0,0,1},
+			{1,0,0,0,0,0,0,0,0,0,1},
+			{1,0,0,0,0,0,0,0,2,0,1},
+			{1,0,0,0,0,0,0,0,0,0,1},
+			{1,0,0,0,0,0,0,0,0,0,1},
+			{1,0,0,0,0,0,0,0,0,0,1},
+			{1,1,1,1,1,1,1,1,1,1,1}
+		};	 //0を何もないところ1を障害物アリとする //大きさを変更したり個々の値を変更すると障害物アリで出来る。
+
         // A-star実行.
+
         // スタート地点.ランダムに設定(ここを使うものに変更)
-        Point2 pStart = GetRandomPosition(map);
+		Point2 pStart = GetRandomPosition(map);
+		Vector3 Epoint = Enemy.transform.position;
+		Epoint.x = pStart.x;
+		Epoint.z = pStart.y;
+		Enemy.transform.position = Epoint;
+
         // ゴール地点.ランダムに設定(ここを使うものに変更)
         Point2 pGoal = GetRandomPosition(map);
         // 斜め移動を許可
         var allowdiag = false;
+
         var pList = CalcPath(pStart, pGoal, map, allowdiag); //ここで経路の計算をしてる、これを実行すれば移動のパスを手に入れられる。
         Debug.Log("開始地点:x座標:"+pStart.x+"y座標:"+pStart.y);
         Debug.Log("終了地点:x座標:"+pGoal.x+"y座標:"+pGoal.y);
+
         // プレイヤーを移動させる.
         foreach (var p in pList)
         {
+			Vector3 tempSpear = Enemy.transform.position;
+			tempSpear.x = p.x;
+			tempSpear.z = p.y;
+			Enemy.transform.position = tempSpear;
             Debug.Log("X座標：" + p.x + "y座標:" + p.y);
             yield return new WaitForSeconds(0.2f);
         }
