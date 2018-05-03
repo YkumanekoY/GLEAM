@@ -8,6 +8,7 @@ public class MapCreat : MonoBehaviour {
 	public GameObject town;
 	public GameObject wallBlock;
 	public GameObject Lump;
+	public GameObject Astar;
 
 	//int input_tate=9;	//マップ縦
 	//int input_yoko=9;	//マップ横	フィールドで入れられたらいいね
@@ -16,7 +17,7 @@ public class MapCreat : MonoBehaviour {
 	//float zPos=0; //スタート位置
 
 	//ステージ配列　0:床, 1:壁
-	public int[,] stageArray = new int[11,11]{
+	public static int[,] stageArray = new int[11,11]{
 		{1,1,1,1,1,1,1,1,1,1,1},
 		{1,0,0,0,0,0,0,0,0,0,1},
 		{1,0,0,0,0,0,0,0,0,0,1},
@@ -52,6 +53,8 @@ public class MapCreat : MonoBehaviour {
 				}
 			}
 		}
+
+		Astar.SendMessage("Move");
 
 	}
 	

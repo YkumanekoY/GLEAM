@@ -305,21 +305,9 @@ public class AStar : MonoBehaviour
         return p;
     }
 
-    IEnumerator Start()
+    public IEnumerator Move()
     {
-		var map =new int[11,11]{
-			{1,1,1,1,1,1,1,1,1,1,1},
-			{1,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,1},
-			{1,0,2,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,2,0,1},
-			{1,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,1},
-			{1,1,1,1,1,1,1,1,1,1,1}
-		};	 //0を何もないところ1を障害物アリとする //大きさを変更したり個々の値を変更すると障害物アリで出来る。
+		var map = MapCreat.stageArray;	 //0を何もないところ1を障害物アリとする //大きさを変更したり個々の値を変更すると障害物アリで出来る。
 
         // A-star実行.
 
@@ -339,7 +327,7 @@ public class AStar : MonoBehaviour
         Debug.Log("開始地点:x座標:"+pStart.x+"y座標:"+pStart.y);
         Debug.Log("終了地点:x座標:"+pGoal.x+"y座標:"+pGoal.y);
 
-        // プレイヤーを移動させる.
+        // エネミーを移動させる.
         foreach (var p in pList)
         {
 			Vector3 tempSpear = Enemy.transform.position;

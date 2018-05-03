@@ -6,6 +6,7 @@ TagManager:
   tags:
   - town
   - Enemy
+  - cube
   layers:
   - Default
   - TransparentFX
