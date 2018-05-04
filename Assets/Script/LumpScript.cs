@@ -6,7 +6,7 @@ public class LumpScript : MonoBehaviour {
 	
 	//public static bool GameStart;
 	bool lightUp = false;
-	public static int lightCount = 1;
+	public static int lightCount = 3;
 	//private Vector3 clickPosition;
 	public GameObject Light; 
 	GameObject LClone;
@@ -20,8 +20,6 @@ public class LumpScript : MonoBehaviour {
 	void Start () {
 
 		AStar aStar = GetComponent<AStar> ();
-		Debug.Log (aStar);
-
 	}
 	void OnUserAction(){
 

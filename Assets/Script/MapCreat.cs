@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MapCreat : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class MapCreat : MonoBehaviour {
 	public GameObject wallBlock;
 	public GameObject Lump;
 	public GameObject Astar;
+	public GameObject start;
 
 	//int input_tate=9;	//マップ縦
 	//int input_yoko=9;	//マップ横	フィールドで入れられたらいいね
@@ -54,13 +56,8 @@ public class MapCreat : MonoBehaviour {
 			}
 		}
 
-		Invoke("Go", 3.5f);
+		start.SetActive (true);
 	}
-
-	void Go (){
-		Instantiate(Astar, new Vector3(9, 0, 9), Quaternion.identity);
-	}
-
 	
 	// Update is called once per frame
 	void Update () {
