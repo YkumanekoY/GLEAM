@@ -28,7 +28,7 @@ public class LumpScript : MonoBehaviour {
 			lightCount--;
 			Debug.Log ("OK");
 
-			//壁の生成
+			//光源生成して子オブジェクトに移動させる
 			for (int i = 0; i < LClone2.Length; i++) {
 				LClone = Instantiate(Light, myTransform + new Vector3(LClone2[i],0,0), Light.transform.rotation);
 				LClone.transform.parent = transform;
@@ -42,6 +42,7 @@ public class LumpScript : MonoBehaviour {
 		//点灯している場合消灯
 		else if (lightUp == true) {
 
+			//子オブジェクト全削除
 			foreach ( Transform child in gameObject.transform )
 			{
 				GameObject.Destroy(child.gameObject);
