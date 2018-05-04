@@ -9,6 +9,7 @@ public class AStar : MonoBehaviour
 	public GameObject Enemy;
 	public static int[,] map;
 
+
     struct Point2
     {
         public int x;
@@ -293,7 +294,7 @@ public class AStar : MonoBehaviour
         Point2 p;
         while (true)
         {
-            p.x = 1;
+			p.x = Random.Range(0, map.GetLength(1));
             p.y = Random.Range(0, map.GetLength(1));
             if (map[p.x, p.y] == 0)
             {
@@ -305,14 +306,16 @@ public class AStar : MonoBehaviour
         return p;
     }
 
-    public IEnumerator Start()
+    public IEnumerator Move()
     {
 		map = MapCreat.stageArray;	 //0を何もないところ1を障害物アリとする //大きさを変更したり個々の値を変更すると障害物アリで出来る。
 
         // A-star実行
 
         // スタート地点.ランダムに設定(ここを使うものに変更)
-		Point2 pStart = GetRandomPosition(map);
+		Point2 pStart=new Point2();
+		pStart.x = 9;
+		pStart.y = 9;
 
 		//エネミーを開始地点に移動
 		Vector3 Epoint = Enemy.transform.position;
@@ -321,7 +324,7 @@ public class AStar : MonoBehaviour
 		Enemy.transform.position = Epoint;
 
         // ゴール地点.ランダムに設定(ここを使うものに変更)
-		Point2 pGoal = GetRandomPosition(map);
+		Point2 pGoal=new Point2();
 		pGoal.x = 5;
 		pGoal.y = 5;
 
@@ -347,7 +350,7 @@ public class AStar : MonoBehaviour
     }
 
 
-    List<Point2> CalcPath(Point2 pStart, Point2 pGoal, int[,] map, bool allowdiag)
+	List<Point2> CalcPath(Point2 pStart,Point2 pGoal, int[,] map, bool allowdiag)
     {
         var pList = new List<Point2>();
         var mgr = new ANodeMgr(pGoal.x, pGoal.y, allowdiag);
