@@ -344,6 +344,7 @@ public class AStar : MonoBehaviour
 			Enemy.transform.position = tempSpear;
             Debug.Log("X座標：" + p.x + "y座標:" + p.y);
             yield return new WaitForSeconds(0.6f);
+
         }
 
         // おしまい
