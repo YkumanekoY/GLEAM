@@ -293,7 +293,7 @@ public class AStar : MonoBehaviour
         Point2 p;
         while (true)
         {
-            p.x = Random.Range(0, map.GetLength(0));
+            p.x = 1;
             p.y = Random.Range(0, map.GetLength(1));
             if (map[p.x, p.y] == 0)
             {
@@ -321,7 +321,10 @@ public class AStar : MonoBehaviour
 		Enemy.transform.position = Epoint;
 
         // ゴール地点.ランダムに設定(ここを使うものに変更)
-        Point2 pGoal = GetRandomPosition(map);
+		Point2 pGoal = GetRandomPosition(map);
+		pGoal.x = 5;
+		pGoal.y = 5;
+
         // 斜め移動を許可
         bool allowdiag = false;
 
