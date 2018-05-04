@@ -306,7 +306,7 @@ public class AStar : MonoBehaviour
         return p;
     }
 
-    public IEnumerator Move()
+	public IEnumerator Start()
     {
 		map = MapCreat.stageArray;	 //0を何もないところ1を障害物アリとする //大きさを変更したり個々の値を変更すると障害物アリで出来る。
 

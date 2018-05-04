@@ -54,10 +54,13 @@ public class MapCreat : MonoBehaviour {
 			}
 		}
 
-		Instantiate(Astar, new Vector3(9, 0, 9), Quaternion.identity);
-		Astar.SendMessage("Move");
-
+		Invoke("Go", 3.5f);
 	}
+
+	void Go (){
+		Instantiate(Astar, new Vector3(9, 0, 9), Quaternion.identity);
+	}
+
 	
 	// Update is called once per frame
 	void Update () {
