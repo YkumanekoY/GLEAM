@@ -8,7 +8,9 @@ public class LumpScript : MonoBehaviour {
 	bool lightUp = false;
 	public static int lightCount = 1;
 	//private Vector3 clickPosition;
-	public GameObject light; 
+	public GameObject Light; 
+	GameObject LClone;
+	private int[] LClone2 = { 1, -1 };
 
 	// Use this for initialization
 	void Start () {
@@ -19,16 +21,32 @@ public class LumpScript : MonoBehaviour {
 		Vector3 myTransform = this.transform.position;
 
 		Debug.Log ("x:" + myTransform.x + " y:" + myTransform.y + " z:"+ myTransform.z);
+
+		//点いてなくて且点灯上限までいってないとき点灯
 		if (lightUp == false && lightCount > 0) {
 			lightUp = true;
 			lightCount--;
 			Debug.Log ("OK");
-		
-			Instantiate(light, myTransform + new Vector3(1,1,0), light.transform.rotation);
-			Instantiate(light, myTransform + new Vector3(-1,1,0), light.transform.rotation);
-			Instantiate(light, myTransform + new Vector3(0,1,1), light.transform.rotation);
-			Instantiate(light, myTransform + new Vector3(0,1,-1), light.transform.rotation);
-		} else if (lightUp == true) {
+
+			//壁の生成
+			for (int i = 0; i < LClone2.Length; i++) {
+				LClone = Instantiate(Light, myTransform + new Vector3(LClone2[i],0,0), Light.transform.rotation);
+				LClone.transform.parent = transform;
+				LClone = Instantiate(Light, myTransform + new Vector3(0,0,LClone2[i]), Light.transform.rotation);
+				LClone.transform.parent = transform;
+			}
+
+			//マップ更新
+
+		} 
+		//点灯している場合消灯
+		else if (lightUp == true) {
+
+			foreach ( Transform child in gameObject.transform )
+			{
+				GameObject.Destroy(child.gameObject);
+			}
+
 			lightUp = false;
 			lightCount++;
 			Debug.Log ("down");

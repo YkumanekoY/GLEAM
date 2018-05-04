@@ -321,7 +321,7 @@ public class AStar : MonoBehaviour
         // ゴール地点.ランダムに設定(ここを使うものに変更)
         Point2 pGoal = GetRandomPosition(map);
         // 斜め移動を許可
-        var allowdiag = false;
+        bool allowdiag = false;
 
         var pList = CalcPath(pStart, pGoal, map, allowdiag); //ここで経路の計算をしてる、これを実行すれば移動のパスを手に入れられる。
         Debug.Log("開始地点:x座標:"+pStart.x+"y座標:"+pStart.y);
