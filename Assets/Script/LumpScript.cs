@@ -10,6 +10,9 @@ public class LumpScript : MonoBehaviour {
 	//private Vector3 clickPosition;
 	public GameObject Light; 
 	GameObject LClone;
+	public GameObject AStar;
+
+	//キャラ特性
 	private int[] LPos = { 1, -1 };
 
 	// Use this for initialization
@@ -30,14 +33,17 @@ public class LumpScript : MonoBehaviour {
 
 			//光源生成して子オブジェクトに移動させる
 			for (int i = 0; i < LPos.Length; i++) {
-				LClone = Instantiate(Light, myTransform + new Vector3(LPos[i],0,0), Light.transform.rotation);
+				
+				LClone = Instantiate (Light, myTransform + new Vector3 (LPos [i], 0, 0), Light.transform.rotation);
 				LClone.transform.parent = transform;
-				LClone = Instantiate(Light, myTransform + new Vector3(0,0,LPos[i]), Light.transform.rotation);
+
+
+				LClone = Instantiate (Light, myTransform + new Vector3 (0, 0, LPos [i]), Light.transform.rotation);
 				LClone.transform.parent = transform;
 			}
 
-			//マップ更新
-
+			//マップ情報更新
+			AStar.SendMessage ("CalcHeuristic");
 		} 
 		//点灯している場合消灯
 		else if (lightUp == true) {

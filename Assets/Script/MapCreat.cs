@@ -54,7 +54,8 @@ public class MapCreat : MonoBehaviour {
 			}
 		}
 
-		Astar.SendMessage("Move");
+		Instantiate(Astar, new Vector3(1, 0, 1), Quaternion.identity);
+		//Astar.SendMessage("Move");
 
 	}
 	

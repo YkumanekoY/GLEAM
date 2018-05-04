@@ -305,7 +305,7 @@ public class AStar : MonoBehaviour
         return p;
     }
 
-    public IEnumerator Move()
+    public IEnumerator Start()
     {
 		int[,] map = MapCreat.stageArray;	 //0を何もないところ1を障害物アリとする //大きさを変更したり個々の値を変更すると障害物アリで出来る。
 
@@ -313,6 +313,8 @@ public class AStar : MonoBehaviour
 
         // スタート地点.ランダムに設定(ここを使うものに変更)
 		Point2 pStart = GetRandomPosition(map);
+
+		//エネミーを開始地点に移動
 		Vector3 Epoint = Enemy.transform.position;
 		Epoint.x = pStart.x;
 		Epoint.z = pStart.y;
@@ -335,7 +337,7 @@ public class AStar : MonoBehaviour
 			tempSpear.z = p.y;
 			Enemy.transform.position = tempSpear;
             Debug.Log("X座標：" + p.x + "y座標:" + p.y);
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.6f);
         }
 
         // おしまい
