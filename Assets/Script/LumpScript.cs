@@ -10,7 +10,7 @@ public class LumpScript : MonoBehaviour {
 	//private Vector3 clickPosition;
 	public GameObject Light; 
 	GameObject LClone;
-	private int[] LClone2 = { 1, -1 };
+	private int[] LPos = { 1, -1 };
 
 	// Use this for initialization
 	void Start () {
@@ -29,10 +29,10 @@ public class LumpScript : MonoBehaviour {
 			Debug.Log ("OK");
 
 			//光源生成して子オブジェクトに移動させる
-			for (int i = 0; i < LClone2.Length; i++) {
-				LClone = Instantiate(Light, myTransform + new Vector3(LClone2[i],0,0), Light.transform.rotation);
+			for (int i = 0; i < LPos.Length; i++) {
+				LClone = Instantiate(Light, myTransform + new Vector3(LPos[i],0,0), Light.transform.rotation);
 				LClone.transform.parent = transform;
-				LClone = Instantiate(Light, myTransform + new Vector3(0,0,LClone2[i]), Light.transform.rotation);
+				LClone = Instantiate(Light, myTransform + new Vector3(0,0,LPos[i]), Light.transform.rotation);
 				LClone.transform.parent = transform;
 			}
 
