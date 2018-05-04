@@ -7,7 +7,7 @@ public class AStar : MonoBehaviour
 {
 
 	public GameObject Enemy;
-
+	public static int[,] map;
 
     struct Point2
     {
@@ -307,9 +307,9 @@ public class AStar : MonoBehaviour
 
     public IEnumerator Start()
     {
-		int[,] map = MapCreat.stageArray;	 //0を何もないところ1を障害物アリとする //大きさを変更したり個々の値を変更すると障害物アリで出来る。
+		map = MapCreat.stageArray;	 //0を何もないところ1を障害物アリとする //大きさを変更したり個々の値を変更すると障害物アリで出来る。
 
-        // A-star実行.
+        // A-star実行
 
         // スタート地点.ランダムに設定(ここを使うものに変更)
 		Point2 pStart = GetRandomPosition(map);
