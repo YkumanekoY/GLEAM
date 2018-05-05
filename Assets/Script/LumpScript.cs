@@ -4,12 +4,13 @@ using System.Collections;
 
 public class LumpScript : MonoBehaviour {
 	
-	//public static bool GameStart;
 	bool lightUp = false;
 	public static int lightCount = 3;
-	//private Vector3 clickPosition;
+
 	public GameObject Light; 
 	GameObject LClone;
+	public GameObject enemy;
+
 	private int mapX=0;
 	private int mapZ=0;
 
@@ -18,9 +19,9 @@ public class LumpScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
-		AStar aStar = GetComponent<AStar> ();
+		
 	}
+
 	void OnUserAction(){
 
 		Vector3 myTransform = this.transform.position;
@@ -51,13 +52,15 @@ public class LumpScript : MonoBehaviour {
 
 				mapX = (int)myTransform.x;
 				mapZ = (int)myTransform.z + LPos [i];
+
 				Debug.Log (mapX + "," + mapZ);
-				AStar.map [mapX, mapZ] = 1;
+				MapCreat.stageArray [mapX, mapZ] = 1;
 			}
 
 			//マップ情報更新
-			//AStar.SendMessage ("CalcPath");
-			//aStar.CalcHeuristic();
+			AStar d2=enemy.GetComponent<AStar>();
+			d2.reStart ();
+
 		} 
 		//点灯している場合消灯
 		else if (lightUp == true) {

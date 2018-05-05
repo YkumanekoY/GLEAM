@@ -8,7 +8,10 @@ public class AStar : MonoBehaviour
 
 	public GameObject Enemy;
 	public static int[,] map;
+	private bool gameStart = false;
 
+	private int ePointX;
+	private int ePointY;
 
     struct Point2
     {
@@ -312,19 +315,36 @@ public class AStar : MonoBehaviour
 
         // A-star実行
 
-        // スタート地点.ランダムに設定(ここを使うものに変更)
-		Point2 pStart=new Point2();
-		pStart.x = 9;
-		pStart.y = 9;
+		if (gameStart == false) {
+			
+			// スタート地点.ランダムに設定(ここを使うものに変更)
+			while (true) {
 
-		//エネミーを開始地点に移動
-		Vector3 Epoint = Enemy.transform.position;
-		Epoint.x = pStart.x;
-		Epoint.z = pStart.y;
-		Enemy.transform.position = Epoint;
+				ePointX = 9;
+				ePointY = Random.Range (0, map.GetLength (1));
+				if (map [ePointX, ePointY] == 0) {
+					break;
+				}
+			}
+			//エネミーを開始地点に移動
+			Enemy.transform.position = new Vector3 (ePointX, 0, ePointY);
 
-        // ゴール地点.ランダムに設定(ここを使うものに変更)
-		Point2 pGoal=new Point2();
+			gameStart = true;
+
+		}else{
+			
+
+			ePointX = (int)Enemy.transform.position.x;
+			ePointY = (int)Enemy.transform.position.z;
+
+		}
+
+		Point2 pStart = new Point2();
+		pStart.x = ePointX;
+		pStart.y = ePointY;
+
+		// ゴール地点.ランダムに設定(ここを使うものに変更)
+		Point2 pGoal = new Point2 ();
 		pGoal.x = 5;
 		pGoal.y = 5;
 
@@ -343,12 +363,17 @@ public class AStar : MonoBehaviour
 			tempSpear.z = p.y;
 			Enemy.transform.position = tempSpear;
             Debug.Log("X座標：" + p.x + "y座標:" + p.y);
+
             yield return new WaitForSeconds(0.6f);
 
         }
 
         // おしまい
     }
+
+	public void reStart(){
+		StartCoroutine(Start());
+	}
 
 
 	List<Point2> CalcPath(Point2 pStart,Point2 pGoal, int[,] map, bool allowdiag)
