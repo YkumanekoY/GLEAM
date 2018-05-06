@@ -11,6 +11,7 @@ public class LumpScript : MonoBehaviour {
 	GameObject LClone;
 	public GameObject enemy;
 
+
 	private int mapX=0;
 	private int mapZ=0;
 
@@ -19,7 +20,6 @@ public class LumpScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 
 	void OnUserAction(){
@@ -54,12 +54,12 @@ public class LumpScript : MonoBehaviour {
 				mapZ = (int)myTransform.z + LPos [i];
 
 				Debug.Log (mapX + "," + mapZ);
-				MapCreat.stageArray [mapX, mapZ] = 1;
+				AStar.map [mapX, mapZ] = 1;
 			}
 
 			//マップ情報更新
 			AStar d2=enemy.GetComponent<AStar>();
-			d2.reStart ();
+			d2.ReStart ();
 
 		} 
 		//点灯している場合消灯

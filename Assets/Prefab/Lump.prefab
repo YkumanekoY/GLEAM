@@ -139,4 +139,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Light: {fileID: 1782256240837508, guid: c7ffaf43234cc48448d8d0ace818f646, type: 2}
-  enemy: {fileID: 1239751861307358, guid: e01b120e08186491b87575fa29fdc816, type: 2}
+  enemy: {fileID: 1565716393104868, guid: 25a7f14ebb8f041d89bd28253f9b0dda, type: 2}

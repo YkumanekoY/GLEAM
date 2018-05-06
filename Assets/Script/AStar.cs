@@ -8,7 +8,6 @@ public class AStar : MonoBehaviour
 
 	public GameObject Enemy;
 	public static int[,] map;
-	private bool gameStart = false;
 
 	private int ePointX;
 	private int ePointY;
@@ -210,6 +209,11 @@ public class AStar : MonoBehaviour
                 // 通過できない.
                 return null;
             }
+			if (map[x, y] == 2)
+			{
+				// 通過できない.
+				return null;
+			}
 
             // ノードを取得する.
             var node = GetNode(x, y, map);
@@ -314,34 +318,22 @@ public class AStar : MonoBehaviour
 		map = MapCreat.stageArray;	 //0を何もないところ1を障害物アリとする //大きさを変更したり個々の値を変更すると障害物アリで出来る。
 
         // A-star実行
-
-		if (gameStart == false) {
 			
-			// スタート地点.ランダムに設定(ここを使うものに変更)
-			while (true) {
-
-				ePointX = 9;
-				ePointY = Random.Range (0, map.GetLength (1));
-				if (map [ePointX, ePointY] == 0) {
-					break;
-				}
+		Point2 pStart = new Point2();
+		// スタート地点.ランダムに設定(ここを使うものに変更)
+		while (true) {
+			
+			pStart.x = 9;
+			pStart.y = Random.Range (0, map.GetLength (1));
+			if (map [pStart.x, pStart.y] == 0) {
+				break;
 			}
-			//エネミーを開始地点に移動
-			Enemy.transform.position = new Vector3 (ePointX, 0, ePointY);
-
-			gameStart = true;
-
-		}else{
-			
-
-			ePointX = (int)Enemy.transform.position.x;
-			ePointY = (int)Enemy.transform.position.z;
-
 		}
 
-		Point2 pStart = new Point2();
-		pStart.x = ePointX;
-		pStart.y = ePointY;
+		//エネミーを開始地点に移動
+		ePointX = pStart.x;
+		ePointY = pStart.y;
+		Enemy.transform.position = new Vector3 (ePointX, 0, ePointY);
 
 		// ゴール地点.ランダムに設定(ここを使うものに変更)
 		Point2 pGoal = new Point2 ();
@@ -371,50 +363,63 @@ public class AStar : MonoBehaviour
         // おしまい
     }
 
-	public void reStart(){
-		StartCoroutine(Start());
-	}
-
 
 	List<Point2> CalcPath(Point2 pStart,Point2 pGoal, int[,] map, bool allowdiag)
-    {
-        var pList = new List<Point2>();
-        var mgr = new ANodeMgr(pGoal.x, pGoal.y, allowdiag);
+	{
+		var pList = new List<Point2> ();
+		var mgr = new ANodeMgr (pGoal.x, pGoal.y, allowdiag);
 
-        // スタート地点のノード取得
-        // スタート地点なのでコストは「0」
-        ANode node = mgr.OpenNode(pStart.x, pStart.y, 0, null, map);
-        mgr.AddOpenList(node);
+		// スタート地点のノード取得
+		// スタート地点なのでコストは「0」
+		ANode node = mgr.OpenNode (pStart.x, pStart.y, 0, null, map);
+		mgr.AddOpenList (node);
 
-        // 試行回数。1000回超えたら強制中断
-        int cnt = 0;
-        while (cnt < 1000)
-        {
-            mgr.RemoveOpenList(node);
-            // 周囲を開く
-            mgr.OpenAround(node, map);
-            // 最小スコアのノードを探す.
-            node = mgr.SearchMinScoreNodeFromOpenList();
-            if (node == null)
-            {
-                // 袋小路なのでおしまい.
-                Debug.Log("Not found path.");
-                break;
-            }
+		// 試行回数。1000回超えたら強制中断
+		int cnt = 0;
+		while (cnt < 1000) {
+			mgr.RemoveOpenList (node);
+			// 周囲を開く
+			mgr.OpenAround (node, map);
+			// 最小スコアのノードを探す.
+			node = mgr.SearchMinScoreNodeFromOpenList ();
+			if (node == null) {
+				// 袋小路なのでおしまい.
+				Debug.Log ("Not found path.");
+				break;
+			}
 
-            if (node.X == pGoal.x && node.Y == pGoal.y)
-            {
-                // ゴールにたどり着いた.
-                Debug.Log("Success.");
-                mgr.RemoveOpenList(node);
-                // パスを取得する
-                node.GetPath(pList);
-                // 反転する
-                pList.Reverse();
-                break;
-            }
-        }
+			if (node.X == pGoal.x && node.Y == pGoal.y) {
+				// ゴールにたどり着いた.
+				Debug.Log ("Success.");
+				mgr.RemoveOpenList (node);
+				// パスを取得する
+				node.GetPath (pList);
+				// 反転する
+				pList.Reverse ();
+				break;
+			}
+		}
 
-        return pList;
-    }
+		return pList;
+	}
+
+	private IEnumerator EnemyRute(Vector2 TargetPosition)
+	{
+		// 斜め移動を許可
+		var allowdiag = false;
+		var pList = CalcPath(new Point2(Mathf.FloorToInt(transform.position.x),Mathf.FloorToInt(transform.position.y)), new Point2(Mathf.FloorToInt(TargetPosition.x),Mathf.FloorToInt(TargetPosition.y)), map, allowdiag); //ここで経路の計算をしてる、
+		// プレイヤーを移動させる.
+		for (var index = 0; index < 3; index++)//3ターン分読み出し
+		{
+			var p = pList[index];
+			transform.position = new Vector3(p.x, p.y);
+			yield return new WaitForSeconds(0.6f);//0.3秒待ってる
+		}
+	}
+
+	public void ReStart(){
+		
+		StartCoroutine("EnemyRute",new Vector2(5f,5f));
+
+	}
 }
