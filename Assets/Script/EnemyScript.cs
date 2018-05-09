@@ -26,7 +26,6 @@ public class EnemyScript : MonoBehaviour {
 			Debug.Log ("c");
 			Instantiate(enemy, new Vector3 (2, 0, 2), Quaternion.identity);
 
-			town.SendMessage ("Damage");
 			town.GetComponent<TownScript>().Damage();
 			Destroy(this.gameObject);
 		}

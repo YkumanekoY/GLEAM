@@ -9,7 +9,7 @@ public class LumpScript : MonoBehaviour {
 
 	public GameObject Light; 
 	GameObject LClone;
-	public GameObject enemy;
+	GameObject enemyC;
 
 
 	private int mapX=0;
@@ -20,7 +20,7 @@ public class LumpScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		enemyC = GameObject.Find("Enemy(Clone)");
 	}
 
 	void OnUserAction(){
@@ -60,7 +60,7 @@ public class LumpScript : MonoBehaviour {
 			}
 
 			//マップ情報更新
-			AStar d2=enemy.GetComponent<AStar>();
+			AStar d2=enemyC.GetComponent<AStar>();
 			//if (!d2.gameObject.active)
 			//	d2.gameObject.SetActive (true);
 			d2.ReStart ();
@@ -93,9 +93,7 @@ public class LumpScript : MonoBehaviour {
 
 			}
 
-			AStar d2=enemy.GetComponent<AStar>();
-			//if (!d2.gameObject.active)
-			//	d2.gameObject.SetActive (true);
+			AStar d2=enemyC.GetComponent<AStar>();
 			d2.ReStart ();
 			}
 
