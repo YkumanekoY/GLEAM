@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: c5ba4cbe317fe4a2490b101ed43f93d4
-timeCreated: 1525323531
+guid: 0633aa0dc97f34859b75b4f44ee7955f
+timeCreated: 1525651404
 licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - Light: {fileID: 1782256240837508, guid: c7ffaf43234cc48448d8d0ace818f646, type: 2}
   - enemy: {fileID: 1565716393104868, guid: 25a7f14ebb8f041d89bd28253f9b0dda, type: 2}
+  - town: {fileID: 1679955324367104, guid: a51240aa402694adc9e1177621197c94, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

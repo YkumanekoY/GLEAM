@@ -357,7 +357,6 @@ public class AStar : MonoBehaviour
             Debug.Log("X座標：" + p.x + "y座標:" + p.y);
 
             yield return new WaitForSeconds(0.6f);
-
         }
 
         // おしまい
@@ -408,12 +407,13 @@ public class AStar : MonoBehaviour
 		// 斜め移動を許可
 		var allowdiag = false;
 		var pList = CalcPath(new Point2(Mathf.FloorToInt(transform.position.x),Mathf.FloorToInt(transform.position.y)), new Point2(Mathf.FloorToInt(TargetPosition.x),Mathf.FloorToInt(TargetPosition.y)), map, allowdiag); //ここで経路の計算をしてる、
+
 		// プレイヤーを移動させる.
 		for (var index = 0; index < 3; index++)//3ターン分読み出し
 		{
 			var p = pList[index];
 			transform.position = new Vector3(p.x, p.y);
-			yield return new WaitForSeconds(0.6f);//0.3秒待ってる
+			yield return new WaitForSeconds(0.8f);//0.3秒待ってる
 		}
 	}
 

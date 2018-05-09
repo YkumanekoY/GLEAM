@@ -20,7 +20,8 @@ public class StartScript : MonoBehaviour {
 
 	public void StartBotton(){
 		Destroy (title.gameObject);
-		enemy.SetActive (true);
+		//enemy.SetActive (true);
 		//enemyGenerate.SetActive (true);
+		Instantiate(enemy, new Vector3 (2, 0, 2), Quaternion.identity);
 	}
 }

@@ -9,7 +9,7 @@ public class MapCreat : MonoBehaviour {
 	public GameObject town;
 	public GameObject wallBlock;
 	public GameObject Lump;
-	public GameObject Astar;
+	public GameObject enemy;
 	public GameObject start;
 
 	//int input_tate=9;	//マップ縦

@@ -20,6 +20,7 @@ public class LumpScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		
 	}
 
 	void OnUserAction(){
@@ -55,15 +56,23 @@ public class LumpScript : MonoBehaviour {
 
 				Debug.Log (mapX + "," + mapZ);
 				AStar.map [mapX, mapZ] = 1;
+
 			}
 
 			//マップ情報更新
 			AStar d2=enemy.GetComponent<AStar>();
+			//if (!d2.gameObject.active)
+			//	d2.gameObject.SetActive (true);
 			d2.ReStart ();
 
 		} 
 		//点灯している場合消灯
 		else if (lightUp == true) {
+
+
+			lightUp = false;
+			lightCount++;
+			Debug.Log ("down");
 
 			//子オブジェクト全削除
 			foreach ( Transform child in gameObject.transform )
@@ -71,9 +80,23 @@ public class LumpScript : MonoBehaviour {
 				GameObject.Destroy(child.gameObject);
 			}
 
-			lightUp = false;
-			lightCount++;
-			Debug.Log ("down");
+			for (int i = 0; i < LPos.Length; i++) {
+
+				mapX = (int)myTransform.x + LPos [i];
+				mapZ = (int)myTransform.z;
+				AStar.map [mapX, mapZ] = 0;
+
+
+				mapX = (int)myTransform.x;
+				mapZ = (int)myTransform.z + LPos [i];
+				AStar.map [mapX, mapZ] = 0;
+
+			}
+
+			AStar d2=enemy.GetComponent<AStar>();
+			//if (!d2.gameObject.active)
+			//	d2.gameObject.SetActive (true);
+			d2.ReStart ();
 			}
 
 	} 
