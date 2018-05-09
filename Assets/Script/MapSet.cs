@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MapCreat : MonoBehaviour {
+public class MapSet: MonoBehaviour {
 
 	public GameObject cube;
 	public GameObject town;
 	public GameObject wallBlock;
 	public GameObject Lump;
-	public GameObject enemy;
-	public GameObject start;
-
 	//int input_tate=9;	//マップ縦
 	//int input_yoko=9;	//マップ横	フィールドで入れられたらいいね
 
@@ -23,12 +20,12 @@ public class MapCreat : MonoBehaviour {
 		{1,1,1,1,1,1,1,1,1,1,1},
 		{1,0,0,0,0,0,0,0,0,0,1},
 		{1,0,0,0,0,0,0,0,0,0,1},
-		{1,0,2,0,0,0,0,2,0,0,1},
 		{1,0,0,0,0,0,0,0,0,0,1},
 		{1,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,2,0,1},
 		{1,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,2,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,1},
 		{1,0,0,0,0,0,0,0,0,0,1},
 		{1,1,1,1,1,1,1,1,1,1,1}
 	};	
@@ -36,7 +33,7 @@ public class MapCreat : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+
 		for (int i = 0; i < stageArray.GetLength(0); i++) {
 			for (int j = 0; j < stageArray.GetLength(1); j++) {
 				if (stageArray[i,j] == 0) {
@@ -47,18 +44,17 @@ public class MapCreat : MonoBehaviour {
 					else {
 						Instantiate(cube, new Vector3(i, -1, j), Quaternion.identity);
 					}
-				}else if(stageArray[i,j] == 2){
+				//}else if(stageArray[i,j] == 2){
 					Instantiate(Lump, new Vector3(i, -1, j), Quaternion.identity);
 				}else {
 					Instantiate(wallBlock, new Vector3(i, 0, j), Quaternion.identity);
 
+
 				}
 			}
 		}
-
-		start.SetActive (true);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
