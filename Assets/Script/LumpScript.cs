@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Linq;
 
 public class LumpScript : MonoBehaviour {
 	
@@ -9,7 +9,7 @@ public class LumpScript : MonoBehaviour {
 
 	public GameObject Light; 
 	GameObject LClone;
-	GameObject enemyC;
+	GameObject[] enemyC;
 
 
 	private int mapX=0;
@@ -20,7 +20,7 @@ public class LumpScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		enemyC = GameObject.Find("Enemy(Clone)");
+		enemyC = GameObject.FindGameObjectsWithTag("Enemy");
 	}
 
 	void OnUserAction(){
@@ -59,9 +59,13 @@ public class LumpScript : MonoBehaviour {
 
 			}
 
+			enemyC = GameObject.FindGameObjectsWithTag("Enemy");
 			//マップ情報更新
-			AStar d2 = enemyC.GetComponent<AStar> ();
-			d2.ReStart ();
+			AStar[] d2 = enemyC.Select(astar => astar.GetComponent<AStar>()).ToArray();
+			foreach(var d in d2)
+			{
+				d.ReStart ();
+			}
 
 		} 
 		//点灯している場合消灯
@@ -90,8 +94,13 @@ public class LumpScript : MonoBehaviour {
 
 			}
 
-			AStar d2 = enemyC.GetComponent<AStar> ();
-			d2.ReStart ();
+			enemyC = GameObject.FindGameObjectsWithTag("Enemy");
+			//マップ情報更新
+			AStar[] d2 = enemyC.Select(astar => astar.GetComponent<AStar>()).ToArray();
+			foreach(var d in d2)
+			{
+				d.ReStart ();
+			}
 		}
 	} 
 

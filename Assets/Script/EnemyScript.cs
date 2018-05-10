@@ -28,6 +28,8 @@ public class EnemyScript : MonoBehaviour {
 
 			town.GetComponent<TownScript>().Damage();
 			Destroy(this.gameObject);
+		}else if(AStar.map[Mathf.FloorToInt(PosX),Mathf.FloorToInt(PosZ)]==1){
+			Destroy (gameObject);
 		}
 		
 	}
