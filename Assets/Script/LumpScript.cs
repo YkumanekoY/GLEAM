@@ -5,7 +5,7 @@ using System.Collections;
 public class LumpScript : MonoBehaviour {
 	
 	bool lightUp = false;
-	public static int lightCount = 3;
+	public static int Count = charaSerect.lightCount;
 
 	public GameObject Light; 
 	GameObject LClone;
@@ -31,10 +31,10 @@ public class LumpScript : MonoBehaviour {
 		Debug.Log (mapX + "," + mapZ);
 
 		//点いてなくて且点灯上限までいってないとき点灯
-		if (lightUp == false && lightCount > 0) {
+		if (lightUp == false && Count > 0) {
 			lightUp = true;
-			lightCount--;
-			Debug.Log ("OK");
+			Count--;
+			Debug.Log ("OK"+Count);
 
 			//光源生成して子オブジェクトに移動させる
 			for (int i = 0; i < LPos.Length; i++) {
@@ -60,9 +60,7 @@ public class LumpScript : MonoBehaviour {
 			}
 
 			//マップ情報更新
-			AStar d2=enemyC.GetComponent<AStar>();
-			//if (!d2.gameObject.active)
-			//	d2.gameObject.SetActive (true);
+			AStar d2 = enemyC.GetComponent<AStar> ();
 			d2.ReStart ();
 
 		} 
@@ -71,13 +69,12 @@ public class LumpScript : MonoBehaviour {
 
 
 			lightUp = false;
-			lightCount++;
-			Debug.Log ("down");
+			Count++;
+			Debug.Log ("down"+Count);
 
 			//子オブジェクト全削除
-			foreach ( Transform child in gameObject.transform )
-			{
-				GameObject.Destroy(child.gameObject);
+			foreach (Transform child in gameObject.transform) {
+				GameObject.Destroy (child.gameObject);
 			}
 
 			for (int i = 0; i < LPos.Length; i++) {
@@ -93,9 +90,13 @@ public class LumpScript : MonoBehaviour {
 
 			}
 
-			AStar d2=enemyC.GetComponent<AStar>();
+			AStar d2 = enemyC.GetComponent<AStar> ();
 			d2.ReStart ();
-			}
-
+		}
 	} 
+
+	void Type(){
+
+	}
+
 }

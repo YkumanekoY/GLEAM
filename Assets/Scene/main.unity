@@ -449,11 +449,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 25a7f14ebb8f041d89bd28253f9b0dda, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &675878708 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1565716393104868, guid: 25a7f14ebb8f041d89bd28253f9b0dda,
-    type: 2}
-  m_PrefabInternal: {fileID: 675878707}
 --- !u!1 &971969836
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,8 +477,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 1565716393104868, guid: 25a7f14ebb8f041d89bd28253f9b0dda, type: 2}
-  enemyGenerate: {fileID: 1888208294}
   title: {fileID: 330332446}
+  cube: {fileID: 1572998850739008, guid: a0f673d14e43f4b5dbc76a874979529c, type: 2}
+  town: {fileID: 1679955324367104, guid: a51240aa402694adc9e1177621197c94, type: 2}
+  wallBlock: {fileID: 1925517685732100, guid: 886592aefa73c4e73a9e96b085082dc3, type: 2}
+  Lump: {fileID: 1237837486661658, guid: 41aa4db9fe1894cf9875ea9bcf234098, type: 2}
+  start: {fileID: 36044560}
 --- !u!4 &971969838
 Transform:
   m_ObjectHideFlags: 0
@@ -591,12 +590,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9466dc05c1a54890b72c5cf9ea6bc3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cube: {fileID: 1572998850739008, guid: a0f673d14e43f4b5dbc76a874979529c, type: 2}
-  town: {fileID: 1679955324367104, guid: a51240aa402694adc9e1177621197c94, type: 2}
-  wallBlock: {fileID: 1925517685732100, guid: 886592aefa73c4e73a9e96b085082dc3, type: 2}
-  Lump: {fileID: 1237837486661658, guid: 41aa4db9fe1894cf9875ea9bcf234098, type: 2}
-  enemy: {fileID: 675878708}
-  start: {fileID: 36044560}
 --- !u!114 &1273035661
 MonoBehaviour:
   m_ObjectHideFlags: 0

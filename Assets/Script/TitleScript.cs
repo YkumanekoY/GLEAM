@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TitleScript : MonoBehaviour {
 
@@ -17,9 +18,7 @@ public class TitleScript : MonoBehaviour {
 		
 	}
 
-	void OnUserAction(){
-		
-		Destroy (title);
-		Destroy (this);
+	public void OnUserAction(){
+		SceneManager.LoadScene("PlayerSerect");
 	}
 }
