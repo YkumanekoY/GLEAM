@@ -212,7 +212,7 @@ public class AStar : MonoBehaviour
 			if (map[x, y] == 2)
 			{
 				// 通過できない.
-				//return null;
+				return null;
 			}
 
             // ノードを取得する.

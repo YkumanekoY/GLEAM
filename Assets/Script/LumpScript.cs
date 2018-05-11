@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Linq;
+using UnityEngine.UI;
 
 public class LumpScript : MonoBehaviour {
 	
 	bool lightUp = false;
-	public static int Count = charaSerect.lightCount;
+	public static int Count = 3;
+
+	public Slider slider;
 
 	public GameObject Light; 
 	GameObject LClone;
 	GameObject[] enemyC;
-
 
 	private int mapX=0;
 	private int mapZ=0;
@@ -20,7 +22,12 @@ public class LumpScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		
 		enemyC = GameObject.FindGameObjectsWithTag("Enemy");
+
+		//slider.maxValue = charaSerect.lightCount;
+
+
 	}
 
 	void OnUserAction(){
@@ -34,6 +41,7 @@ public class LumpScript : MonoBehaviour {
 		if (lightUp == false && Count > 0) {
 			lightUp = true;
 			Count--;
+			//slider.value--;
 			Debug.Log ("OK"+Count);
 
 			//光源生成して子オブジェクトに移動させる
@@ -74,6 +82,7 @@ public class LumpScript : MonoBehaviour {
 
 			lightUp = false;
 			Count++;
+			//slider.value++;
 			Debug.Log ("down"+Count);
 
 			//子オブジェクト全削除

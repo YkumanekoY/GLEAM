@@ -15,7 +15,6 @@ public class charaSerect : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Debug.Log(player);
 	}
 	
 	// Update is called once per frame
@@ -29,6 +28,7 @@ public class charaSerect : MonoBehaviour {
 		lightCount = 4;
 		lightHave = 6;
 		power = 1;
+
 	}
 
 	public void charaB(){
@@ -55,7 +55,7 @@ public class charaSerect : MonoBehaviour {
 		} else {
 			
 			SceneManager.LoadScene ("Map");
-
+			Debug.Log (player + "," + lightCount + "," + lightHave + "," + power);
 		}
 
 	}

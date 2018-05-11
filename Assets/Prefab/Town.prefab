@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33306116050228418}
   - component: {fileID: 65088287651324894}
   - component: {fileID: 23549000691397598}
-  - component: {fileID: 114073966461861752}
+  - component: {fileID: 114328989481876012}
   m_Layer: 1
   m_Name: Town
   m_TagString: town
@@ -96,7 +96,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114073966461861752
+--- !u!114 &114328989481876012
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

@@ -5,6 +5,7 @@ using UnityEngine;
 public class StartScript : MonoBehaviour {
 
 	public GameObject enemy;
+	public GameObject time;
 	//public GameObject enemyGenerate;
 	public Canvas title;
 	public GameObject cube;
@@ -42,6 +43,8 @@ public class StartScript : MonoBehaviour {
 
 	public void StartBotton(){
 		Destroy (title.gameObject);
-		Instantiate(enemy, new Vector3 (2, 0, 2), Quaternion.identity);
+		//Instantiate(enemy, new Vector3 (2, 0, 2), Quaternion.identity);
+		enemy.SetActive(true);
+		time.SetActive(true);
 	}
 }
