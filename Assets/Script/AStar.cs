@@ -7,7 +7,7 @@ public class AStar : MonoBehaviour
 {
 
 	public GameObject Enemy;
-	public static int[,] map;
+	int[,] map;
 
 	private int ePointX;
 	private int ePointY;
@@ -385,6 +385,7 @@ public class AStar : MonoBehaviour
 			if (node == null) {
 				// 袋小路なのでおしまい.
 				Debug.Log ("Not found path.");
+				Destroy (this);
 				break;
 			}
 
@@ -405,6 +406,9 @@ public class AStar : MonoBehaviour
 
 	private IEnumerator EnemyRute(Vector2 TargetPosition)
 	{
+
+		map = MapSet.stageArray;
+
 		// 斜め移動を許可
 		var allowdiag = false;
 		var pList = CalcPath(new Point2(Mathf.FloorToInt(transform.position.x),Mathf.FloorToInt(transform.position.y)), new Point2(Mathf.FloorToInt(TargetPosition.x),Mathf.FloorToInt(TargetPosition.y)), map, allowdiag); //ここで経路の計算をしてる、
@@ -417,12 +421,14 @@ public class AStar : MonoBehaviour
 			yield return new WaitForSeconds(0.8f);//0.3秒待ってる
 		}
 	}
+
 	Coroutine col;
+
 	public void ReStart(){
-		if (col != null) {
+		/*if (col != null) {
 			StopCoroutine (col);
 			col = null;
-		}
+		}*/
 		StartCoroutine("EnemyRute",new Vector2(5f,5f));
 
 	}

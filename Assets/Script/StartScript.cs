@@ -44,7 +44,7 @@ public class StartScript : MonoBehaviour {
 	public void StartBotton(){
 		Destroy (title.gameObject);
 		//Instantiate(enemy, new Vector3 (2, 0, 2), Quaternion.identity);
-		enemy.SetActive(true);
+		//enemy.SetActive(true);
 		time.SetActive(true);
 	}
 }
