@@ -8,10 +8,8 @@ public class charaSerect : MonoBehaviour {
 
 	public static int lightCount = 0; //一度に点けられる量
 	public static int lightHave = 0; //配置できる数
-	public static int power = 0; //点灯範囲
 
-
-	public static int player = 0;
+	public static int player = 0;//キャラA:1 B:2 C:3
 
 	// Use this for initialization
 	void Start () {
@@ -23,11 +21,11 @@ public class charaSerect : MonoBehaviour {
 	}
 
 	public void charaA(){
+		
 		player = 1;
 
 		lightCount = 4;
 		lightHave = 6;
-		power = 1;
 
 	}
 
@@ -36,7 +34,6 @@ public class charaSerect : MonoBehaviour {
 
 		lightCount = 3;
 		lightHave = 10;
-		power = 2;
 	}
 
 	public void charaC(){
@@ -44,7 +41,6 @@ public class charaSerect : MonoBehaviour {
 
 		lightCount = 3;
 		lightHave = 4;
-		power = 3;
 	}
 
 	public void StartBotton(){
@@ -53,9 +49,8 @@ public class charaSerect : MonoBehaviour {
 			Debug.Log ("No!");
 
 		} else {
-			
 			SceneManager.LoadScene ("Map");
-			Debug.Log (player + "," + lightCount + "," + lightHave + "," + power);
+			Debug.Log (player + "," + lightCount + "," + lightHave );
 		}
 
 	}

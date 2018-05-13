@@ -22,21 +22,18 @@ public class LumpScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
-		enemyC = GameObject.FindGameObjectsWithTag("Enemy");
-		slider = GameObject.Find("energy").GetComponent<Slider>();
+		enemyC = GameObject.FindGameObjectsWithTag ("Enemy");
+		slider = GameObject.Find ("energy").GetComponent<Slider> ();
 		slider.maxValue = charaSerect.lightCount;
 		slider.minValue = 0;
 		slider.value = charaSerect.lightCount;
-
 	}
 
 
 	void OnUserAction(){
-		
 		Vector3 myTransform = this.transform.position;
 
-		Debug.Log ("x:" + myTransform.x + " y:" + myTransform.y + " z:"+ myTransform.z);
+		Debug.Log ("x:" + myTransform.x + " y:" + myTransform.y + " z:" + myTransform.z);
 		Debug.Log (mapX + "," + mapZ);
 
 		//点いてなくて且点灯上限までいってないとき点灯
@@ -45,18 +42,17 @@ public class LumpScript : MonoBehaviour {
 			lightUp = true;
 			Count--;
 			slider.value--;
-			Debug.Log ("OK"+Count);
+			Debug.Log ("OK" + Count);
 			Type (myTransform);
-
-		} 
+		}
 		//点灯している場合消灯
 		else if (lightUp == true) {
 
 			lightUp = false;
 			Count++;
 			slider.value++;
-			Debug.Log ("down"+Count);
-			TypeB(myTransform);
+			Debug.Log ("down" + Count);
+			TypeB (myTransform);
 
 			//子オブジェクト全削除
 			foreach (Transform child in gameObject.transform) {
@@ -64,39 +60,37 @@ public class LumpScript : MonoBehaviour {
 			}
 
 		}
-	} 
+	}
 
 	void Type(Vector3 myTransform){
 		if (charaSerect.player == 1) {
-			
-				//光源生成して子オブジェクトに移動させる
-				for (int i = 0; i < LPos.Length; i++) {
 
-					LClone = Instantiate (Light, myTransform + new Vector3 (LPos [i], 0, 0), Light.transform.rotation);
-					LClone.transform.parent = transform;
+			//光源生成して子オブジェクトに移動させる
+			for (int i = 0; i < LPos.Length; i++) {
 
-					LClone = Instantiate (Light, myTransform + new Vector3 (0, 0, LPos [i]), Light.transform.rotation);
-					LClone.transform.parent = transform;
+				LClone = Instantiate (Light, myTransform + new Vector3 (LPos [i], 0, 0), Light.transform.rotation);
+				LClone.transform.parent = transform;
 
-					mapX = (int)myTransform.x + LPos [i];
-					mapZ = (int)myTransform.z;
+				LClone = Instantiate (Light, myTransform + new Vector3 (0, 0, LPos [i]), Light.transform.rotation);
+				LClone.transform.parent = transform;
+
+				mapX = (int)myTransform.x + LPos [i];
+				mapZ = (int)myTransform.z;
 				MapSet.stageArray [mapX, mapZ] = 1;
 
-
-					mapX = (int)myTransform.x;
-					mapZ = (int)myTransform.z + LPos [i];
-
+				mapX = (int)myTransform.x;
+				mapZ = (int)myTransform.z + LPos [i];
 				MapSet.stageArray [mapX, mapZ] = 1;
 
-				}
+			}
 
-				enemyC = GameObject.FindGameObjectsWithTag("Enemy");
-				//マップ情報更新
-				AStar[] d2 = enemyC.Select(astar => astar.GetComponent<AStar>()).ToArray();
-				foreach(var d in d2)
-				{
-					d.ReStart ();
-				}
+			enemyC = GameObject.FindGameObjectsWithTag("Enemy");
+			//マップ情報更新
+			AStar[] d2 = enemyC.Select(astar => astar.GetComponent<AStar>()).ToArray();
+			foreach(var d in d2)
+			{
+				d.ReStart ();
+			}
 			return;
 			
 		}else if (charaSerect.player == 2) {
