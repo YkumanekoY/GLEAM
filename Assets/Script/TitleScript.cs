@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class TitleScript : MonoBehaviour {
 
-	public Canvas title;
+	public Texture[] PlayerTexture;
+	public float fps = 24;
 
 	// Use this for initialization
 	void Start () {
@@ -15,10 +16,20 @@ public class TitleScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
 
-	public void OnUserAction(){
-		SceneManager.LoadScene("PlayerSerect");
+/*		var index : int = Time.time * framesPerSecond;
+		index = index % frames.Length;
+		guiTexture.texture = frames[index];*/
+
+		if( Input.GetMouseButtonDown(0) ) 
+		{ 
+			Vector2 point = Camera.main.ScreenToWorldPoint( Input.mousePosition ); 
+			Collider2D collition2d = Physics2D.OverlapPoint( point ); 
+			if( collition2d ) 
+			{ 
+				Debug.Log( collition2d.gameObject.name.ToString() );
+				SceneManager.LoadScene("PlayerSerect");
+			} 
+		} 
 	}
 }
