@@ -13,11 +13,16 @@ public class StartScript : MonoBehaviour {
 	public GameObject wallBlock;
 	public GameObject Lump;
 
+	public GameObject cA;
+	public GameObject cB;
+	public GameObject cC;
+
 	public GameObject start;
 
 
 	// Use this for initialization
 	void Start () {
+		//マップ生成
 		for (int i = 0; i < MapSet.stageArray.GetLength(0); i++) {
 			for (int j = 0; j < MapSet.stageArray.GetLength(1); j++) {
 				
@@ -33,6 +38,22 @@ public class StartScript : MonoBehaviour {
 
 			}
 		}
+
+		//左下キャラアイコン
+		if (charaSerect.player == 1) {
+			cA.SetActive (true);
+			cB.SetActive (false);
+			cC.SetActive (false);
+		} else if (charaSerect.player == 2) {
+			cA.SetActive (false);
+			cB.SetActive (true);
+			cC.SetActive (false);
+		} else {
+			cA.SetActive (false);
+			cB.SetActive (false);
+			cC.SetActive (true);
+		}
+
 		start.SetActive (true);
 	}
 
