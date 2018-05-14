@@ -6,9 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class TitleScript : MonoBehaviour {
 
-	public Texture[] PlayerTexture;
-	public float fps = 24;
-
 	// Use this for initialization
 	void Start () {
 		
@@ -16,10 +13,6 @@ public class TitleScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-/*		var index : int = Time.time * framesPerSecond;
-		index = index % frames.Length;
-		guiTexture.texture = frames[index];*/
 
 		if( Input.GetMouseButtonDown(0) ) 
 		{ 
