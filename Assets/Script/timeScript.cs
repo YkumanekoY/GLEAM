@@ -21,4 +21,5 @@ public class timeScript : MonoBehaviour {
 			SceneManager.LoadScene ("Clear");
 		GetComponent<Text> ().text = ((int)time).ToString ();
 	}
+
 }

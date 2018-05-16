@@ -11,6 +11,8 @@ public class MapSet: MonoBehaviour {
 	public GameObject wallBlock;
 	public GameObject Lump;
 
+	GameObject sound;
+
 	private int have = charaSerect.lightHave;
 
 	int oPosX = 0;
@@ -23,23 +25,28 @@ public class MapSet: MonoBehaviour {
 	//float zPos=0; //スタート位置
 
 	//ステージ配列　0:床, 1:壁
-	public static int[,] stageArray = new int[11,11]{
-		{1,1,1,1,1,1,1,1,1,1,1},
-		{1,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,1},
-		{1,1,1,1,1,1,1,1,1,1,1}
-	};	
+	public static int[,] stageArray = new int[11,11];
 
 
 	// Use this for initialization
 	void Start () {
+		stageArray = new int[11,11]{
+			{0,0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0,0}
+		};	
+
+		sound = GameObject.Find ("Sound");
+		mainSound d1 = sound.GetComponent<mainSound> ();
+		d1.DontDestroyEnabled = false;
 
 		for (int i = 0; i < stageArray.GetLength(0); i++) {
 			for (int j = 0; j < stageArray.GetLength(1); j++) {
@@ -109,11 +116,9 @@ public class MapSet: MonoBehaviour {
 	public void nextButton(){
 		
 		if (have == 0) {
+			Destroy(sound);
 			SceneManager.LoadScene ("main");
-		} else {
-			
-		}
-
+		} 
 	}
 
 

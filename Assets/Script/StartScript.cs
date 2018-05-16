@@ -6,7 +6,6 @@ public class StartScript : MonoBehaviour {
 
 	public GameObject enemy;
 	public GameObject time;
-	//public GameObject enemyGenerate;
 	public Canvas title;
 	public GameObject cube;
 	public GameObject town;

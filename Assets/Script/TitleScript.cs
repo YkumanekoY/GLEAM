@@ -21,6 +21,7 @@ public class TitleScript : MonoBehaviour {
 			if( collition2d ) 
 			{ 
 				Debug.Log( collition2d.gameObject.name.ToString() );
+				GetComponent<AudioSource> ().Play();
 				SceneManager.LoadScene("PlayerSerect");
 			} 
 		} 

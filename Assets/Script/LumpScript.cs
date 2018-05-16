@@ -24,6 +24,7 @@ public class LumpScript : MonoBehaviour {
 	void Start () {
 		enemyC = GameObject.FindGameObjectsWithTag ("Enemy");
 		slider = GameObject.Find ("energy").GetComponent<Slider> ();
+		Debug.Log ("slider");
 		slider.maxValue = charaSerect.lightCount;
 		slider.minValue = 0;
 		slider.value = charaSerect.lightCount;
@@ -68,23 +69,26 @@ public class LumpScript : MonoBehaviour {
 			//光源生成して子オブジェクトに移動させる
 			for (int i = 0; i < LPos.Length; i++) {
 
-				LClone = Instantiate (Light, myTransform + new Vector3 (LPos [i], 0, 0), Light.transform.rotation);
-				LClone.transform.parent = transform;
-
-				LClone = Instantiate (Light, myTransform + new Vector3 (0, 0, LPos [i]), Light.transform.rotation);
-				LClone.transform.parent = transform;
-
 				mapX = (int)myTransform.x + LPos [i];
 				mapZ = (int)myTransform.z;
-				MapSet.stageArray [mapX, mapZ] = 1;
+				if (mapX <= 10 && mapZ <= 10) {
+					LClone = Instantiate (Light, myTransform + new Vector3 (LPos [i], 0, 0), Light.transform.rotation);
+					LClone.transform.parent = transform;
+					MapSet.stageArray [mapX, mapZ] = 1;
+				}
 
 				mapX = (int)myTransform.x;
 				mapZ = (int)myTransform.z + LPos [i];
-				MapSet.stageArray [mapX, mapZ] = 1;
+				if (mapX <= 10 && mapZ <= 10) {
+					LClone = Instantiate (Light, myTransform + new Vector3 (0, 0, LPos [i]), Light.transform.rotation);
+					LClone.transform.parent = transform;
+					MapSet.stageArray [mapX, mapZ] = 1;
+				}	
 
 			}
 
 			enemyC = GameObject.FindGameObjectsWithTag("Enemy");
+
 			//マップ情報更新
 			AStar[] d2 = enemyC.Select(astar => astar.GetComponent<AStar>()).ToArray();
 			foreach(var d in d2)
@@ -112,19 +116,23 @@ public class LumpScript : MonoBehaviour {
 
 				mapX = (int)myTransform.x + LPos [i];
 				mapZ = (int)myTransform.z;
-				MapSet.stageArray [mapX, mapZ] = 1;
+				if (mapX <= 10 && mapZ <= 10)
+					MapSet.stageArray [mapX, mapZ] = 1;
 
 				mapX = (int)myTransform.x + LPos [i];
 				mapZ = (int)myTransform.z + LPos [i];
-				MapSet.stageArray [mapX, mapZ] = 1;
+				if (mapX <= 10 && mapZ <= 10)
+					MapSet.stageArray [mapX, mapZ] = 1;
 
 				mapX = (int)myTransform.x;
 				mapZ = (int)myTransform.z + LPos [i];
-				MapSet.stageArray [mapX, mapZ] = 1;
+				if (mapX <= 10 && mapZ <= 10)
+					MapSet.stageArray [mapX, mapZ] = 1;
 
 				mapX = (int)myTransform.x - LPos [i];
 				mapZ = (int)myTransform.z + LPos [i];
-				MapSet.stageArray [mapX, mapZ] = 1;
+				if (mapX <= 10 && mapZ <= 10)
+					MapSet.stageArray [mapX, mapZ] = 1;
 
 			}
 
@@ -160,27 +168,33 @@ public class LumpScript : MonoBehaviour {
 
 				mapX = (int)myTransform.x + LPos [i];
 				mapZ = (int)myTransform.z;
-				MapSet.stageArray [mapX, mapZ] = 1;
+				if (mapX <= 10 && mapZ <= 10)
+					MapSet.stageArray [mapX, mapZ] = 1;
 
 				mapX = (int)myTransform.x + 2*LPos [i];
 				mapZ = (int)myTransform.z;
-				MapSet.stageArray [mapX, mapZ] = 1;
+				if (mapX <= 10 && mapZ <= 10)
+					MapSet.stageArray [mapX, mapZ] = 1;
 
 				mapX = (int)myTransform.x + LPos [i];
 				mapZ = (int)myTransform.z + LPos [i];
-				MapSet.stageArray [mapX, mapZ] = 1;
+				if (mapX <= 10 && mapZ <= 10)
+					MapSet.stageArray [mapX, mapZ] = 1;
 
 				mapX = (int)myTransform.x;
 				mapZ = (int)myTransform.z + LPos [i];
-				MapSet.stageArray [mapX, mapZ] = 1;
+				if (mapX <= 10 && mapZ <= 10)
+					MapSet.stageArray [mapX, mapZ] = 1;
 
 				mapX = (int)myTransform.x;
 				mapZ = (int)myTransform.z + 2*LPos [i];
-				MapSet.stageArray [mapX, mapZ] = 1;
+				if (mapX <= 10 && mapZ <= 10)
+					MapSet.stageArray [mapX, mapZ] = 1;
 
 				mapX = (int)myTransform.x - LPos [i];
 				mapZ = (int)myTransform.z + LPos [i];
-				MapSet.stageArray [mapX, mapZ] = 1;
+				if (mapX <= 10 && mapZ <= 10)
+					MapSet.stageArray [mapX, mapZ] = 1;
 
 			}
 
@@ -203,12 +217,14 @@ public class LumpScript : MonoBehaviour {
 
 				mapX = (int)myTransform.x + LPos [i];
 				mapZ = (int)myTransform.z;
-				MapSet.stageArray [mapX, mapZ] = 0;
+				if (mapX <= 10 && mapZ <= 10)
+					MapSet.stageArray [mapX, mapZ] = 0;
 
 
 				mapX = (int)myTransform.x;
 				mapZ = (int)myTransform.z + LPos [i];
-				MapSet.stageArray [mapX, mapZ] = 0;
+				if (mapX <= 10 && mapZ <= 10)
+					MapSet.stageArray [mapX, mapZ] = 0;
 
 			}
 			return;
@@ -218,19 +234,23 @@ public class LumpScript : MonoBehaviour {
 
 				mapX = (int)myTransform.x + LPos [i];
 				mapZ = (int)myTransform.z;
-				MapSet.stageArray [mapX, mapZ] = 0;
+				if (mapX <= 10 && mapZ <= 10)
+					MapSet.stageArray [mapX, mapZ] = 0;
 
 				mapX = (int)myTransform.x + LPos [i];
 				mapZ = (int)myTransform.z + LPos [i];
-				MapSet.stageArray [mapX, mapZ] = 0;
+				if (mapX <= 10 && mapZ <= 10)
+					MapSet.stageArray [mapX, mapZ] = 0;
 
 				mapX = (int)myTransform.x;
 				mapZ = (int)myTransform.z + LPos [i];
-				MapSet.stageArray [mapX, mapZ] = 0;
+				if (mapX <= 10 && mapZ <= 10)
+					MapSet.stageArray [mapX, mapZ] = 0;
 
 				mapX = (int)myTransform.x - LPos [i];
 				mapZ = (int)myTransform.z + LPos [i];
-				MapSet.stageArray [mapX, mapZ] = 0;
+				if (mapX <= 10 && mapZ <= 10)
+					MapSet.stageArray [mapX, mapZ] = 0;
 			}
 			return;
 		}else if (charaSerect.player == 3) {
@@ -239,14 +259,33 @@ public class LumpScript : MonoBehaviour {
 
 				mapX = (int)myTransform.x + LPos [i];
 				mapZ = (int)myTransform.z;
+				if (mapX <= 10 && mapZ <= 10)
+					MapSet.stageArray [mapX, mapZ] = 0;
 
-				MapSet.stageArray [mapX, mapZ] = 0;
+				mapX = (int)myTransform.x + 2*LPos [i];
+				mapZ = (int)myTransform.z;
+				if (mapX <= 10 && mapZ <= 10)
+					MapSet.stageArray [mapX, mapZ] = 0;
 
+				mapX = (int)myTransform.x + LPos [i];
+				mapZ = (int)myTransform.z + LPos [i];
+				if (mapX <= 10 && mapZ <= 10)
+					MapSet.stageArray [mapX, mapZ] = 0;
 
 				mapX = (int)myTransform.x;
 				mapZ = (int)myTransform.z + LPos [i];
+				if (mapX <= 10 && mapZ <= 10)
+					MapSet.stageArray [mapX, mapZ] = 0;
 
-				MapSet.stageArray [mapX, mapZ] = 0;
+				mapX = (int)myTransform.x;
+				mapZ = (int)myTransform.z + 2*LPos [i];
+				if (mapX <= 10 && mapZ <= 10)
+					MapSet.stageArray [mapX, mapZ] = 0;
+
+				mapX = (int)myTransform.x - LPos [i];
+				mapZ = (int)myTransform.z + LPos [i];
+				if (mapX <= 10 && mapZ <= 10)
+					MapSet.stageArray [mapX, mapZ] = 0;
 			}
 			return;
 		}

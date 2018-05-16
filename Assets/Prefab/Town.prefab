@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 65088287651324894}
   - component: {fileID: 23549000691397598}
   - component: {fileID: 114328989481876012}
+  - component: {fileID: 114602922615774340}
   m_Layer: 1
   m_Name: Town
   m_TagString: town
@@ -57,7 +58,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: ea9eb5eda823f46cbb1fc36a6f7dba61, type: 2}
+  - {fileID: 2100000, guid: d395494f7eee743c89ee980f98f84225, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -105,6 +106,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa73404e56abd4b1c8267343d1e9e890, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hp: 3
+--- !u!114 &114602922615774340
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1679955324367104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 472b0b40e05cc4adb8b403a5599e3ded, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Hp: 3

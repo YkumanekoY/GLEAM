@@ -414,7 +414,7 @@ public class AStar : MonoBehaviour
 		var pList = CalcPath(new Point2(Mathf.FloorToInt(transform.position.x),Mathf.FloorToInt(transform.position.y)), new Point2(Mathf.FloorToInt(TargetPosition.x),Mathf.FloorToInt(TargetPosition.y)), map, allowdiag); //ここで経路の計算をしてる、
 
 		// プレイヤーを移動させる.
-		for (var index = 0; index < pList.Count; index++)//3ターン分読み出し
+		for (var index = 0; index < pList.Count; index++)
 		{
 			var p = pList[index];
 			transform.position = new Vector3(p.x, p.y);
@@ -425,10 +425,10 @@ public class AStar : MonoBehaviour
 	Coroutine col;
 
 	public void ReStart(){
-		/*if (col != null) {
+		if (col != null) {
 			StopCoroutine (col);
 			col = null;
-		}*/
+		}
 		StartCoroutine("EnemyRute",new Vector2(5f,5f));
 
 	}

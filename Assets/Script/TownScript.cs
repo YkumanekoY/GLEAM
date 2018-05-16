@@ -13,15 +13,22 @@ public class TownScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		
 	}
 
 	public void Damage(){
 		
 		Hp--;
 		Debug.Log (Hp);
+
 		if (Hp <= 0) {
-			SceneManager.LoadScene ("GameOver");
+			var clones = GameObject.FindGameObjectsWithTag ("Enemy");
+			foreach (var clone in clones){
+				Destroy(clone);
+			}
+
+			FadeController.isFadeOut = true;
+			FadeController.scene = 4;
 		}
 	}
 }
