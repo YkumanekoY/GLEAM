@@ -73,7 +73,8 @@ public class StartScript : MonoBehaviour {
 		Destroy(sound);
 
 		foreach (GameObject L in Ls) {
-			L.GetComponent<LumpScript>().enabled =true;
+			if(L.name=="Lump(Clone)")
+				L.GetComponent<LumpScript>().enabled =true;
 		}
 
 		Destroy (title.gameObject);

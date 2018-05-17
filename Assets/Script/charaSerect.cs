@@ -11,6 +11,7 @@ public class charaSerect : MonoBehaviour {
 	public static int player = 0;//キャラA:1 B:2 C:3
 
 	public GameObject help;
+	GameObject sound;
 
 	// Use this for initialization
 	void Start () {
@@ -55,6 +56,16 @@ public class charaSerect : MonoBehaviour {
 			Debug.Log (player + "," + lightCount + "," + lightHave );
 		}
 
+	}
+
+	public void BackBotton(){
+		
+		sound = GameObject.Find ("Sound");
+		mainSound d1 = sound.GetComponent<mainSound> ();
+		d1.DontDestroyEnabled = false;
+
+		Destroy(sound);
+		SceneManager.LoadScene ("Title");
 	}
 
 	public void PushDown(){

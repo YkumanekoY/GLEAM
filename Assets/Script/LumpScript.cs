@@ -57,6 +57,9 @@ public class LumpScript : MonoBehaviour {
 			Type (myTransform);
 			//効果音
 			up.PlayOneShot (up.clip);
+			//スポットライト点灯
+			GameObject childObject = gameObject.transform.Find("Spotlight").gameObject;
+			childObject.SetActive (true);
 
 			enemyC = GameObject.FindGameObjectsWithTag("Enemy");
 			//マップ情報更新
@@ -79,7 +82,11 @@ public class LumpScript : MonoBehaviour {
 
 			//子オブジェクト全削除
 			foreach (Transform child in gameObject.transform) {
-				GameObject.Destroy (child.gameObject);
+				if (child.tag != "Lump") {
+					GameObject.Destroy (child.gameObject);
+				} else if (child.name == "Spotlight") {
+					child.gameObject.SetActive (false);
+				}
 			}
 
 			enemyC = GameObject.FindGameObjectsWithTag("Enemy");

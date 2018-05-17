@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cube: {fileID: 1572998850739008, guid: a0f673d14e43f4b5dbc76a874979529c, type: 2}
-  town: {fileID: 1679955324367104, guid: a51240aa402694adc9e1177621197c94, type: 2}
+  town: {fileID: 1263385830601376, guid: 0601dd230eb35464f8283e635da56b42, type: 2}
   wallBlock: {fileID: 1925517685732100, guid: 886592aefa73c4e73a9e96b085082dc3, type: 2}
   Lump: {fileID: 1237837486661658, guid: 41aa4db9fe1894cf9875ea9bcf234098, type: 2}
   distance: 100

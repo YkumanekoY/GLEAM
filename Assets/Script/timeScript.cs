@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class timeScript : MonoBehaviour {
 	
-	private float time = 30;
+	private float time = 60;
 
 	// Use this for initialization
 	void Start () {
