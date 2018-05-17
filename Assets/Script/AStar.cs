@@ -7,7 +7,7 @@ public class AStar : MonoBehaviour
 {
 
 	public GameObject Enemy;
-	int[,] map;
+	private int[,] map;
 
 	private int ePointX;
 	private int ePointY;
@@ -324,8 +324,23 @@ public class AStar : MonoBehaviour
 		// スタート地点.ランダムに設定(ここを使うものに変更)
 		while (true) {
 			
-			pStart.x = 9;
-			pStart.y = Random.Range (0, map.GetLength (1));
+			int pos1 = Random.Range (0, 3);
+
+			if (pos1 == 0) {
+				pStart.x = Random.Range (0, 10);
+				pStart.y = 0;
+			} else if (pos1 == 1) {
+				pStart.y = Random.Range (0, 10);
+				pStart.x = 0;
+			} else if (pos1 == 2) {
+				pStart.x = Random.Range (0, 10);
+				pStart.y = 10;
+			} else if (pos1 == 3) {
+				pStart.y = Random.Range (0, 10);
+				pStart.x = 10; 
+			}
+			//pStart.x = 9;
+			//pStart.y = Random.Range (0, map.GetLength (1));
 			if (map [pStart.x, pStart.y] == 0) {
 				break;
 			}
@@ -411,7 +426,7 @@ public class AStar : MonoBehaviour
 
 		// 斜め移動を許可
 		var allowdiag = false;
-		var pList = CalcPath(new Point2(Mathf.FloorToInt(transform.position.x),Mathf.FloorToInt(transform.position.y)), new Point2(Mathf.FloorToInt(TargetPosition.x),Mathf.FloorToInt(TargetPosition.y)), map, allowdiag); //ここで経路の計算をしてる、
+		var pList = CalcPath(new Point2(Mathf.FloorToInt(this.transform.position.x),Mathf.FloorToInt(this.transform.position.y)), new Point2(Mathf.FloorToInt(TargetPosition.x),Mathf.FloorToInt(TargetPosition.y)), map, allowdiag); //ここで経路の計算をしてる、
 
 		// プレイヤーを移動させる.
 		for (var index = 0; index < pList.Count; index++)

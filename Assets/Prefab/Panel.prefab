@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224348149355707588}
   - component: {fileID: 222552803680715906}
   - component: {fileID: 114082728979427328}
-  - component: {fileID: 114538126181152506}
+  - component: {fileID: 114314961737978522}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114538126181152506
+--- !u!114 &114314961737978522
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -67,8 +67,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585fff9a6a730446e90262cd40639ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFadeOut: 0
-  isFadeIn: 0
 --- !u!222 &222552803680715906
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -17,10 +17,15 @@ public class StartScript : MonoBehaviour {
 	public GameObject cC;
 
 	public GameObject start;
-
+	GameObject sound;
 
 	// Use this for initialization
 	void Start () {
+
+		sound = GameObject.Find ("Sound");
+		mainSound d1 = sound.GetComponent<mainSound> ();
+		d1.DontDestroyEnabled = false;
+
 		//マップ生成
 		for (int i = 0; i < MapSet.stageArray.GetLength(0); i++) {
 			for (int j = 0; j < MapSet.stageArray.GetLength(1); j++) {
@@ -62,6 +67,15 @@ public class StartScript : MonoBehaviour {
 	}
 
 	public void StartBotton(){
+		
+		GameObject[] Ls = GameObject.FindGameObjectsWithTag ("Lump");
+
+		Destroy(sound);
+
+		foreach (GameObject L in Ls) {
+			L.GetComponent<LumpScript>().enabled =true;
+		}
+
 		Destroy (title.gameObject);
 		enemy.SetActive(true);
 		time.SetActive(true);

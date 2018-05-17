@@ -7,12 +7,11 @@ public class EnemyScript : MonoBehaviour {
 	private float PosX;
 	private float PosZ;
 
-	public GameObject enemy;
 	public GameObject town;
 
 	// Use this for initialization
 	void Start () {
-		GameObject town = GameObject.Find("Town(Clone)");
+		GameObject town = GameObject.FindGameObjectWithTag("town");
 		Debug.Log (town);
 	}
 	
@@ -23,11 +22,10 @@ public class EnemyScript : MonoBehaviour {
 		PosZ = this.gameObject.transform.position.z;
 
 		if (PosX == 5.0f&&PosZ==5.0f) {
-			Debug.Log ("c");
-			Instantiate(enemy, new Vector3 (2, 0, 2), Quaternion.identity);
-
-			town.GetComponent<TownScript>().Damage();
+			
+			TownScript.Hp--;
 			Destroy(this.gameObject);
+
 		}else if(MapSet.stageArray[Mathf.FloorToInt(PosX),Mathf.FloorToInt(PosZ)]==1){
 			Destroy (gameObject);
 		}

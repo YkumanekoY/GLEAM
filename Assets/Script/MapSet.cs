@@ -11,7 +11,6 @@ public class MapSet: MonoBehaviour {
 	public GameObject wallBlock;
 	public GameObject Lump;
 
-	GameObject sound;
 
 	private int have = charaSerect.lightHave;
 
@@ -34,19 +33,18 @@ public class MapSet: MonoBehaviour {
 			{0,0,0,0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,1,0,0,0,0,0},
+			{0,0,0,0,1,1,1,0,0,0,0},
+			{0,0,0,1,1,0,1,1,0,0,0},
+			{0,0,0,0,1,1,1,0,0,0,0},
+			{0,0,0,0,0,1,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0,0}
-		};	
+		};
 
-		sound = GameObject.Find ("Sound");
-		mainSound d1 = sound.GetComponent<mainSound> ();
-		d1.DontDestroyEnabled = false;
+		Lump.GetComponent<LumpScript> ().enabled = false;
+
 
 		for (int i = 0; i < stageArray.GetLength(0); i++) {
 			for (int j = 0; j < stageArray.GetLength(1); j++) {
@@ -58,9 +56,8 @@ public class MapSet: MonoBehaviour {
 						Instantiate (cube, new Vector3 (i, -1, j), Quaternion.identity);
 					}
 				}else {
-					Instantiate(wallBlock, new Vector3(i, 0, j), Quaternion.identity);
-
-
+					Instantiate(wallBlock, new Vector3(i, -1, j), Quaternion.identity);
+					stageArray [i, j] = 0;
 				}
 			}
 		}
@@ -116,7 +113,6 @@ public class MapSet: MonoBehaviour {
 	public void nextButton(){
 		
 		if (have == 0) {
-			Destroy(sound);
 			SceneManager.LoadScene ("main");
 		} 
 	}

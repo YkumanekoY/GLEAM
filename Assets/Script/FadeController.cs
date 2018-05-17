@@ -36,18 +36,25 @@ public class FadeController : MonoBehaviour {
 		fadeImage.enabled = true;  // a)パネルの表示をオンにする
 		alfa += fadeSpeed;         // b)不透明度を徐々にあげる
 		SetAlpha ();               // c)変更した透明度をパネルに反映する
+
 		if(alfa >= 1){             // d)完全に不透明になったら処理を抜ける
 			isFadeOut = false;
+
+			if (d == 1) 
+				SceneManager.LoadScene("PlayerSerect");
 			if (d == 4)
 				SceneManager.LoadScene("GameOver");
+			
+			scene = 0;
 		}
 	}
 
 	public void StartFadeIn(){
 		fadeImage.enabled = true;  // a)パネルの表示をオンにする
 		alfa -= fadeSpeed;         // b)不透明度を徐々に下げる
-		SetAlpha ();               // c)変更した透明度をパネルに反映する
-		if(alfa >= 1){             // d)完全に透明になったら処理を抜ける
+		SetAlpha (); 				// c)変更した透明度をパネルに反映する
+		//Debug.Log(alfa);
+		if(alfa <= 0){             // d)完全に透明になったら処理を抜ける
 			isFadeIn = false;
 		}
 	}

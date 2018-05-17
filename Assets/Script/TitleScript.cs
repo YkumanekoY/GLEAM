@@ -22,7 +22,9 @@ public class TitleScript : MonoBehaviour {
 			{ 
 				Debug.Log( collition2d.gameObject.name.ToString() );
 				GetComponent<AudioSource> ().Play();
-				SceneManager.LoadScene("PlayerSerect");
+
+				FadeController.isFadeOut = true;
+				FadeController.scene = 1;
 			} 
 		} 
 	}

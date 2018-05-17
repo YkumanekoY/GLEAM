@@ -14,6 +14,7 @@ public class charaSerect : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		FadeController.isFadeIn = true;
 	}
 	
 	// Update is called once per frame

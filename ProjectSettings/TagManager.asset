@@ -7,6 +7,7 @@ TagManager:
   - town
   - Enemy
   - cube
+  - Lump
   layers:
   - Default
   - TransparentFX

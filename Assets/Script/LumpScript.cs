@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UI;
 
 public class LumpScript : MonoBehaviour {
 	
 	bool lightUp = false;
-	public static int Count = 3;
+	public static int Count;
 
 	Slider slider;
 
@@ -20,14 +21,23 @@ public class LumpScript : MonoBehaviour {
 	//キャラ特性
 	private int[] LPos = { 1, -1 };
 
+	//効果音
+	private AudioSource up;
+	private AudioSource down;
+
 	// Use this for initialization
 	void Start () {
-		enemyC = GameObject.FindGameObjectsWithTag ("Enemy");
+		
 		slider = GameObject.Find ("energy").GetComponent<Slider> ();
-		Debug.Log ("slider");
+
+		slider.value = charaSerect.lightCount;
+		Count = charaSerect.lightCount;
 		slider.maxValue = charaSerect.lightCount;
 		slider.minValue = 0;
-		slider.value = charaSerect.lightCount;
+
+		AudioSource[] audioSources = GetComponents<AudioSource>();
+		up = audioSources[0];
+		down = audioSources[1];
 	}
 
 
@@ -45,6 +55,16 @@ public class LumpScript : MonoBehaviour {
 			slider.value--;
 			Debug.Log ("OK" + Count);
 			Type (myTransform);
+			//効果音
+			up.PlayOneShot (up.clip);
+
+			enemyC = GameObject.FindGameObjectsWithTag("Enemy");
+			//マップ情報更新
+			AStar[] d2 = enemyC.Select(astar => astar.GetComponent<AStar>()).ToArray();
+			foreach(var d in d2)
+			{
+				d.ReStart ();
+			}
 		}
 		//点灯している場合消灯
 		else if (lightUp == true) {
@@ -54,10 +74,20 @@ public class LumpScript : MonoBehaviour {
 			slider.value++;
 			Debug.Log ("down" + Count);
 			TypeB (myTransform);
+			//効果音
+			down.PlayOneShot (down.clip);
 
 			//子オブジェクト全削除
 			foreach (Transform child in gameObject.transform) {
 				GameObject.Destroy (child.gameObject);
+			}
+
+			enemyC = GameObject.FindGameObjectsWithTag("Enemy");
+			//マップ情報更新
+			AStar[] d2 = enemyC.Select(astar => astar.GetComponent<AStar>()).ToArray();
+			foreach(var d in d2)
+			{
+				d.ReStart ();
 			}
 
 		}
@@ -71,7 +101,7 @@ public class LumpScript : MonoBehaviour {
 
 				mapX = (int)myTransform.x + LPos [i];
 				mapZ = (int)myTransform.z;
-				if (mapX <= 10 && mapZ <= 10) {
+				if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0){
 					LClone = Instantiate (Light, myTransform + new Vector3 (LPos [i], 0, 0), Light.transform.rotation);
 					LClone.transform.parent = transform;
 					MapSet.stageArray [mapX, mapZ] = 1;
@@ -79,7 +109,7 @@ public class LumpScript : MonoBehaviour {
 
 				mapX = (int)myTransform.x;
 				mapZ = (int)myTransform.z + LPos [i];
-				if (mapX <= 10 && mapZ <= 10) {
+			if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0){
 					LClone = Instantiate (Light, myTransform + new Vector3 (0, 0, LPos [i]), Light.transform.rotation);
 					LClone.transform.parent = transform;
 					MapSet.stageArray [mapX, mapZ] = 1;
@@ -87,124 +117,124 @@ public class LumpScript : MonoBehaviour {
 
 			}
 
-			enemyC = GameObject.FindGameObjectsWithTag("Enemy");
+			/*enemyC = GameObject.FindGameObjectsWithTag("Enemy");
 
 			//マップ情報更新
 			AStar[] d2 = enemyC.Select(astar => astar.GetComponent<AStar>()).ToArray();
 			foreach(var d in d2)
 			{
 				d.ReStart ();
-			}
+			}*/
 			return;
 			
 		}else if (charaSerect.player == 2) {
 			
 			//光源生成して子オブジェクトに移動させる
 			for (int i = 0; i < LPos.Length; i++) {
-
-				LClone = Instantiate (Light, myTransform + new Vector3 (LPos [i], 0, 0), Light.transform.rotation);
-				LClone.transform.parent = transform;
-
-				LClone = Instantiate (Light, myTransform + new Vector3 (LPos [i], 0, LPos[i]), Light.transform.rotation);
-				LClone.transform.parent = transform;
-
-				LClone = Instantiate (Light, myTransform + new Vector3 (0, 0, LPos [i]), Light.transform.rotation);
-				LClone.transform.parent = transform;
-
-				LClone = Instantiate (Light, myTransform + new Vector3 (-1 * LPos[i], 0,LPos [i]), Light.transform.rotation);
-				LClone.transform.parent = transform;
-
+				
 				mapX = (int)myTransform.x + LPos [i];
 				mapZ = (int)myTransform.z;
-				if (mapX <= 10 && mapZ <= 10)
+				if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0) {
 					MapSet.stageArray [mapX, mapZ] = 1;
+					LClone = Instantiate (Light, myTransform + new Vector3 (LPos [i], 0, 0), Light.transform.rotation);
+					LClone.transform.parent = transform;
+				}
 
 				mapX = (int)myTransform.x + LPos [i];
 				mapZ = (int)myTransform.z + LPos [i];
-				if (mapX <= 10 && mapZ <= 10)
+				if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0) {
 					MapSet.stageArray [mapX, mapZ] = 1;
+					LClone = Instantiate (Light, myTransform + new Vector3 (LPos [i], 0, LPos [i]), Light.transform.rotation);
+					LClone.transform.parent = transform;
+				}
 
 				mapX = (int)myTransform.x;
 				mapZ = (int)myTransform.z + LPos [i];
-				if (mapX <= 10 && mapZ <= 10)
+				if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0) {
 					MapSet.stageArray [mapX, mapZ] = 1;
+					LClone = Instantiate (Light, myTransform + new Vector3 (0, 0, LPos [i]), Light.transform.rotation);
+					LClone.transform.parent = transform;
+				}
 
 				mapX = (int)myTransform.x - LPos [i];
 				mapZ = (int)myTransform.z + LPos [i];
-				if (mapX <= 10 && mapZ <= 10)
+				if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0) {
 					MapSet.stageArray [mapX, mapZ] = 1;
+					LClone = Instantiate (Light, myTransform + new Vector3 (-1 * LPos [i], 0, LPos [i]), Light.transform.rotation);
+					LClone.transform.parent = transform;
+				}
 
 			}
 
-			enemyC = GameObject.FindGameObjectsWithTag("Enemy");
+			/*enemyC = GameObject.FindGameObjectsWithTag("Enemy");
 			//マップ情報更新
 			AStar[] d2 = enemyC.Select(astar => astar.GetComponent<AStar>()).ToArray();
 			foreach(var d in d2)
 			{
 				d.ReStart ();
-			}
+			}*/
 			return;
 			
 		}else if (charaSerect.player == 3) {
 			for (int i = 0; i < LPos.Length; i++) {
 
-				LClone = Instantiate (Light, myTransform + new Vector3 (LPos [i], 0, 0), Light.transform.rotation);
-				LClone.transform.parent = transform;
-
-				LClone = Instantiate (Light, myTransform + new Vector3 (2*LPos [i], 0, 0), Light.transform.rotation);
-				LClone.transform.parent = transform;
-
-				LClone = Instantiate (Light, myTransform + new Vector3 (LPos [i], 0, LPos[i]), Light.transform.rotation);
-				LClone.transform.parent = transform;
-
-				LClone = Instantiate (Light, myTransform + new Vector3 (0, 0, LPos [i]), Light.transform.rotation);
-				LClone.transform.parent = transform;
-
-				LClone = Instantiate (Light, myTransform + new Vector3 (0, 0, 2*LPos [i]), Light.transform.rotation);
-				LClone.transform.parent = transform;
-
-				LClone = Instantiate (Light, myTransform + new Vector3 (-1 * LPos[i], 0,LPos [i]), Light.transform.rotation);
-				LClone.transform.parent = transform;
-
 				mapX = (int)myTransform.x + LPos [i];
 				mapZ = (int)myTransform.z;
-				if (mapX <= 10 && mapZ <= 10)
+				if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0) {
 					MapSet.stageArray [mapX, mapZ] = 1;
+					LClone = Instantiate (Light, myTransform + new Vector3 (LPos [i], 0, 0), Light.transform.rotation);
+					LClone.transform.parent = transform;
+				}
 
 				mapX = (int)myTransform.x + 2*LPos [i];
 				mapZ = (int)myTransform.z;
-				if (mapX <= 10 && mapZ <= 10)
+				if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0) {
 					MapSet.stageArray [mapX, mapZ] = 1;
+					LClone = Instantiate (Light, myTransform + new Vector3 (2 * LPos [i], 0, 0), Light.transform.rotation);
+					LClone.transform.parent = transform;
+				}
 
 				mapX = (int)myTransform.x + LPos [i];
 				mapZ = (int)myTransform.z + LPos [i];
-				if (mapX <= 10 && mapZ <= 10)
+				if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0) {
 					MapSet.stageArray [mapX, mapZ] = 1;
+					LClone = Instantiate (Light, myTransform + new Vector3 (LPos [i], 0, LPos [i]), Light.transform.rotation);
+					LClone.transform.parent = transform;
+				}
 
 				mapX = (int)myTransform.x;
 				mapZ = (int)myTransform.z + LPos [i];
-				if (mapX <= 10 && mapZ <= 10)
+				if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0) {
 					MapSet.stageArray [mapX, mapZ] = 1;
+					LClone = Instantiate (Light, myTransform + new Vector3 (0, 0, LPos [i]), Light.transform.rotation);
+					LClone.transform.parent = transform;
+				}
 
 				mapX = (int)myTransform.x;
 				mapZ = (int)myTransform.z + 2*LPos [i];
-				if (mapX <= 10 && mapZ <= 10)
+				if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0) {
 					MapSet.stageArray [mapX, mapZ] = 1;
+					LClone = Instantiate (Light, myTransform + new Vector3 (0, 0, 2 * LPos [i]), Light.transform.rotation);
+					LClone.transform.parent = transform;
+				}
 
 				mapX = (int)myTransform.x - LPos [i];
 				mapZ = (int)myTransform.z + LPos [i];
-				if (mapX <= 10 && mapZ <= 10)
+				if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0) {
 					MapSet.stageArray [mapX, mapZ] = 1;
+					LClone = Instantiate (Light, myTransform + new Vector3 (-1 * LPos [i], 0, LPos [i]), Light.transform.rotation);
+					LClone.transform.parent = transform;
+				}
 
 			}
 
-			enemyC = GameObject.FindGameObjectsWithTag("Enemy");
+			/*enemyC = GameObject.FindGameObjectsWithTag("Enemy");
 			//マップ情報更新
 			AStar[] d2 = enemyC.Select(astar => astar.GetComponent<AStar>()).ToArray();
 			foreach(var d in d2)
 			{
 				d.ReStart ();
-			}
+			}*/
 			return;
 		}
 
@@ -217,13 +247,13 @@ public class LumpScript : MonoBehaviour {
 
 				mapX = (int)myTransform.x + LPos [i];
 				mapZ = (int)myTransform.z;
-				if (mapX <= 10 && mapZ <= 10)
+				if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0) 
 					MapSet.stageArray [mapX, mapZ] = 0;
 
 
 				mapX = (int)myTransform.x;
 				mapZ = (int)myTransform.z + LPos [i];
-				if (mapX <= 10 && mapZ <= 10)
+				if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0) 
 					MapSet.stageArray [mapX, mapZ] = 0;
 
 			}
@@ -234,22 +264,22 @@ public class LumpScript : MonoBehaviour {
 
 				mapX = (int)myTransform.x + LPos [i];
 				mapZ = (int)myTransform.z;
-				if (mapX <= 10 && mapZ <= 10)
+				if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0) 
 					MapSet.stageArray [mapX, mapZ] = 0;
 
 				mapX = (int)myTransform.x + LPos [i];
 				mapZ = (int)myTransform.z + LPos [i];
-				if (mapX <= 10 && mapZ <= 10)
+				if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0) 
 					MapSet.stageArray [mapX, mapZ] = 0;
 
 				mapX = (int)myTransform.x;
 				mapZ = (int)myTransform.z + LPos [i];
-				if (mapX <= 10 && mapZ <= 10)
+				if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0) 
 					MapSet.stageArray [mapX, mapZ] = 0;
 
 				mapX = (int)myTransform.x - LPos [i];
 				mapZ = (int)myTransform.z + LPos [i];
-				if (mapX <= 10 && mapZ <= 10)
+				if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0) 
 					MapSet.stageArray [mapX, mapZ] = 0;
 			}
 			return;
@@ -259,32 +289,32 @@ public class LumpScript : MonoBehaviour {
 
 				mapX = (int)myTransform.x + LPos [i];
 				mapZ = (int)myTransform.z;
-				if (mapX <= 10 && mapZ <= 10)
+				if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0) 
 					MapSet.stageArray [mapX, mapZ] = 0;
 
 				mapX = (int)myTransform.x + 2*LPos [i];
 				mapZ = (int)myTransform.z;
-				if (mapX <= 10 && mapZ <= 10)
+				if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0) 
 					MapSet.stageArray [mapX, mapZ] = 0;
 
 				mapX = (int)myTransform.x + LPos [i];
 				mapZ = (int)myTransform.z + LPos [i];
-				if (mapX <= 10 && mapZ <= 10)
+				if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0) 
 					MapSet.stageArray [mapX, mapZ] = 0;
 
 				mapX = (int)myTransform.x;
 				mapZ = (int)myTransform.z + LPos [i];
-				if (mapX <= 10 && mapZ <= 10)
+				if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0) 
 					MapSet.stageArray [mapX, mapZ] = 0;
 
 				mapX = (int)myTransform.x;
 				mapZ = (int)myTransform.z + 2*LPos [i];
-				if (mapX <= 10 && mapZ <= 10)
+				if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0) 
 					MapSet.stageArray [mapX, mapZ] = 0;
 
 				mapX = (int)myTransform.x - LPos [i];
 				mapZ = (int)myTransform.z + LPos [i];
-				if (mapX <= 10 && mapZ <= 10)
+				if (mapX <= 10 && mapX >= 0 && mapZ <= 10 && mapZ >= 0) 
 					MapSet.stageArray [mapX, mapZ] = 0;
 			}
 			return;

@@ -17,7 +17,7 @@ public class timeScript : MonoBehaviour {
 	void Update () {
 
 		time -= Time.deltaTime;
-		if (time < 0)
+		if (time <= 0)
 			SceneManager.LoadScene ("Clear");
 		GetComponent<Text> ().text = ((int)time).ToString ();
 	}
