@@ -15,6 +15,10 @@ public class LumpScript : MonoBehaviour {
 	GameObject LClone;
 	GameObject[] enemyC;
 
+	/*SpriteRenderer MainSpriteRenderer;
+	public Sprite StandbySprite;
+	public Sprite UpSprite;*/
+
 	private int mapX=0;
 	private int mapZ=0;
 
@@ -34,6 +38,8 @@ public class LumpScript : MonoBehaviour {
 		Count = charaSerect.lightCount;
 		slider.maxValue = charaSerect.lightCount;
 		slider.minValue = 0;
+
+		//MainSpriteRenderer.sprite = StandbySprite;
 
 		AudioSource[] audioSources = GetComponents<AudioSource>();
 		up = audioSources[0];
@@ -59,7 +65,10 @@ public class LumpScript : MonoBehaviour {
 			up.PlayOneShot (up.clip);
 			//スポットライト点灯
 			GameObject childObject = gameObject.transform.Find("Spotlight").gameObject;
+			//MainSpriteRenderer = childObject.GetComponent<SpriteRenderer> ();
 			childObject.SetActive (true);
+			//MainSpriteRenderer.sprite = UpSprite;
+
 
 			enemyC = GameObject.FindGameObjectsWithTag("Enemy");
 			//マップ情報更新
@@ -79,6 +88,7 @@ public class LumpScript : MonoBehaviour {
 			TypeB (myTransform);
 			//効果音
 			down.PlayOneShot (down.clip);
+			//MainSpriteRenderer.sprite = UpSprite;
 
 			//子オブジェクト全削除
 			foreach (Transform child in gameObject.transform) {

@@ -7,7 +7,9 @@ public class gameOver : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		FadeController.isFadeIn = true;
+			whiteFade.isWhiteFadeIn = true;
+			FadeController.isFadeIn = true;
+
 	}
 	
 	// Update is called once per frame
@@ -16,6 +18,8 @@ public class gameOver : MonoBehaviour {
 	}
 
 	public void titleBack(){
+
+		this.GetComponent<AudioSource> ().Play ();
 		SceneManager.LoadScene ("Title");
 	}
 }

@@ -17,8 +17,11 @@ public class timeScript : MonoBehaviour {
 	void Update () {
 
 		time -= Time.deltaTime;
-		if (time <= 0)
-			SceneManager.LoadScene ("Clear");
+
+		if (time <= 0) {
+			whiteFade.scene = 5;
+			whiteFade.isWhiteFadeOut = true;
+		}
 		GetComponent<Text> ().text = ((int)time).ToString ();
 	}
 
