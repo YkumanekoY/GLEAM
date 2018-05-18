@@ -11,6 +11,7 @@ public class MapSet: MonoBehaviour {
 	public GameObject wallBlock;
 	public GameObject Lump;
 
+	public Text count;
 
 	private int have = charaSerect.lightHave;
 
@@ -61,6 +62,8 @@ public class MapSet: MonoBehaviour {
 				}
 			}
 		}
+
+		count.GetComponent<Text> ().text = (have).ToString ();
 	}
 
 	public float distance = 100f;
@@ -92,7 +95,7 @@ public class MapSet: MonoBehaviour {
 						Instantiate (Lump, new Vector3 (oPosX, -1, oPosZ), Quaternion.identity);
 						have--;
 
-						Debug.Log (have);
+						count.GetComponent<Text> ().text = (have).ToString ();
 					} 
 				} else if (result.gameObject.name == "Lump(Clone)") {
 
@@ -104,7 +107,7 @@ public class MapSet: MonoBehaviour {
 					Instantiate (cube, new Vector3 (oPosX, -1, oPosZ), Quaternion.identity);
 					have++;
 
-					Debug.Log (have);
+					count.GetComponent<Text> ().text = (have).ToString ();
 				}
 			}
 		}

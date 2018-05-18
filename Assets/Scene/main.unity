@@ -1880,7 +1880,7 @@ MonoBehaviour:
   enemys:
   - {fileID: 1565716393104868, guid: 25a7f14ebb8f041d89bd28253f9b0dda, type: 2}
   appearNextTime: 4
-  maxNumOfEnemys: 10
+  maxNumOfEnemys: 30
 --- !u!4 &1888208296
 Transform:
   m_ObjectHideFlags: 0
