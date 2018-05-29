@@ -36,13 +36,13 @@ public class charaSerect : MonoBehaviour {
 		player = 2;
 
 		lightCount = 3;
-		lightHave = 10;
+		lightHave = 8;
 	}
 
 	public void charaC(){
 		player = 3;
 
-		lightCount = 3;
+		lightCount = 2;
 		lightHave = 4;
 	}
 
